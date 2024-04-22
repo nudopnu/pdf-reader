@@ -2,4 +2,6 @@
     <input type="file" (change)="onFileChange($event)" accept=".pdf">
     <input type="range" #slider (input)="onSliderChange($event)">
 </div>
-<canvas #canvas></canvas>
+<div id="page-container">
+    <canvas #canvas></canvas>
+</div>

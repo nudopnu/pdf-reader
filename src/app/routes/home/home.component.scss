@@ -1,8 +1,17 @@
+#page-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    z-index: -1;
+}
+
+#page-container > *{
+    position: absolute;
+}
+
 canvas {
     display: block;
     width: 100%;
-    margin: auto;
-    height: 100vh;
+    // height: 100vh;
     background-color: #f3f3f3;
-    z-index: -1;
 }
