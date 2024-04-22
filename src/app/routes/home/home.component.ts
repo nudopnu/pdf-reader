@@ -18,6 +18,8 @@ export class HomeComponent {
   @ViewChild('canvas') canvasRef!: ElementRef<HTMLCanvasElement>;
   @ViewChild('slider') sliderRef!: ElementRef<HTMLInputElement>;
   @Input() scale = 1;
+  @Input() resolution_factor = 2;
+
   pdfDocument?: PDFDocumentProxy;
   debounceTimeout?: NodeJS.Timeout;
   currentPage = 1;
@@ -61,10 +63,12 @@ export class HomeComponent {
       const textcontent = this.getReadableText2(textContent);
       console.log(textcontent);
 
-      const viewport = page.getViewport({ scale: this.scale });
+      const dpr = window.devicePixelRatio || 1;
+      const inv_resolution_factor = 1 / this.resolution_factor;
+      const viewport = page.getViewport({ scale: this.scale * dpr * inv_resolution_factor });
       if (this.svgElement) this.svgElement.remove();
       this.svgElement = this.buildSVG(viewport, textContent) as SVGElement;
-      this.svgElement.style.zIndex = "1";
+      this.svgElement.style.zIndex = "100";
       this.svgElement.style.fill = "transparent";
       document.getElementById("page-container")!.append(this.svgElement);
     }, 10);
@@ -74,12 +78,8 @@ export class HomeComponent {
     const dpr = window.devicePixelRatio || 1;
     const yScale = document.body.getBoundingClientRect().height / page.getViewport({ scale: 1 }).height / dpr;
     const xScale = document.body.getBoundingClientRect().width / page.getViewport({ scale: 1 }).width / dpr;
-    this.scale = Math.min(xScale, yScale);
-    // alert(this.scale)
-    // const viewport = page.getViewport({ scale: this.scale });
-    // Set the scale based on the window's inner height and the device pixel ratio
-    // this.scale = (window.innerHeight * window.devicePixelRatio) / page.getViewport({ scale: 1 }).height;
-    // const viewport = page.getViewport({ scale: this.scale });
+    const inv_resolution_factor = 1 / this.resolution_factor;
+    this.scale = this.resolution_factor * Math.min(xScale, yScale);
     const viewport = page.getViewport({ scale: this.scale });
 
     // Support HiDPI-screens.
@@ -92,16 +92,14 @@ export class HomeComponent {
     canvas.width = Math.floor(viewport.width * outputScale);
     canvas.height = Math.floor(viewport.height * outputScale);
     canvas.style.margin = "auto";
-    canvas.style.width = "auto";
+    canvas.style.width = canvas.width * inv_resolution_factor + 'px';
 
-    const transform = outputScale !== 1
-      ? [outputScale, 0, 0, outputScale, 0, 0]
-      : null;
+    const transform = [outputScale, 0, 0, outputScale, 0, 0];
 
     const renderContext = {
       canvasContext: context!,
       transform: transform!,
-      viewport: viewport
+      viewport: viewport,
     };
     page.render(renderContext);
   }
@@ -226,6 +224,7 @@ export class HomeComponent {
     svg.setAttribute("height", viewport.height + "px");
     // items are transformed to have 1px font size
     svg.setAttribute("font-size", "1");
+
 
     // processing all items
     textContent.items.forEach((textItem: TextItem | TextMarkedContent) => {
