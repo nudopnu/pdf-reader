@@ -34,8 +34,14 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "node_modules/pdfjs-dist/build/",
+                "output": "pdfjs"
+              }
             ],
+            "externalDependencies": [""],
             "styles": [
               "src/styles.scss"
             ],
