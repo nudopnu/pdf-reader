@@ -1,12 +1,10 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { PDFDocumentProxy, PDFPageProxy, PageViewport } from 'pdfjs-dist';
 import { TextContent, TextItem, TextMarkedContent } from 'pdfjs-dist/types/src/display/api';
+import { isTextItem } from '../../core/pdfjs/Utils';
+import { getParagraphs2 } from '../../core/pdfjs/ParagraphDetection';
 
 declare const pdfjsLib: any;
-
-function isTextItem(textItem: TextItem | TextMarkedContent): textItem is TextItem {
-  return Object.hasOwn(textItem, 'transform');
-};
 
 @Component({
   selector: 'pdf-home',
@@ -36,16 +34,16 @@ export class HomeComponent {
 
     const file = fileList[0];
     const pdfBytes = await this.readFile(file);
-
-    await this.setPdfDocument(pdfBytes);
+    const pdfDocument = (await pdfjsLib.getDocument(pdfBytes).promise) as PDFDocumentProxy;
+    this.updateSlider(pdfDocument.numPages);
+    this.setPage(1);
+    this.pdfDocument = pdfDocument;
   }
 
-  private async setPdfDocument(pdfBytes: unknown) {
-    this.pdfDocument = await pdfjsLib.getDocument(pdfBytes).promise;
-    this.sliderRef!.nativeElement.setAttribute('max', `${this.pdfDocument!.numPages}`);
+  private updateSlider(numPages: number) {
+    this.sliderRef!.nativeElement.setAttribute('max', `${numPages}`);
     this.sliderRef!.nativeElement.setAttribute('min', "1");
     this.sliderRef!.nativeElement.setAttribute('value', "1");
-    this.setPage(1);
   }
 
   async onSliderChange(event: Event) {
@@ -60,8 +58,8 @@ export class HomeComponent {
       await this.renderPage(page);
       const textContent = await page.getTextContent();
       console.log(textContent);
-      const textcontent = this.getReadableText2(textContent);
-      console.log(textcontent);
+      const paragraphs = getParagraphs2(textContent);
+      console.log(paragraphs);
 
       const dpr = window.devicePixelRatio || 1;
       const inv_resolution_factor = 1 / this.resolution_factor;
@@ -162,7 +160,7 @@ export class HomeComponent {
     console.log(improvedMarkdownText.trim()); // Strip any extra newlines at the end
   }
 
-  getReadableText2(data: TextContent) {
+  getReadableText12(data: TextContent) {
     let textContent = [];
     let currentParagraph = "";
     let previousItem: TextItem;
@@ -247,7 +245,7 @@ export class HomeComponent {
   }
 
   private readFile(file: File) {
-    return new Promise((resolve, reject) => {
+    return new Promise<Uint8Array>((resolve, reject) => {
       const fileReader = new FileReader();
       fileReader.onload = () => {
         const bytes = new Uint8Array(fileReader.result as ArrayBuffer);
