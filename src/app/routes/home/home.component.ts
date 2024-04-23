@@ -1,8 +1,8 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { PDFDocumentProxy, PDFPageProxy, PageViewport } from 'pdfjs-dist';
 import { TextContent, TextItem, TextMarkedContent } from 'pdfjs-dist/types/src/display/api';
-import { isTextItem } from '../../core/pdfjs/Utils';
 import { getParagraphs2 } from '../../core/pdfjs/ParagraphDetection';
+import { isTextItem } from '../../core/pdfjs/Utils';
 
 declare const pdfjsLib: any;
 
@@ -31,8 +31,8 @@ export class HomeComponent {
   async onFileChange(event: Event) {
     const fileList = (event.target! as HTMLInputElement).files;
     if (!fileList) return;
-
     const file = fileList[0];
+    if (!file) return;
     const pdfBytes = await this.readFile(file);
     const pdfDocument = (await pdfjsLib.getDocument(pdfBytes).promise) as PDFDocumentProxy;
     this.updateSlider(pdfDocument.numPages);
@@ -66,7 +66,7 @@ export class HomeComponent {
       const viewport = page.getViewport({ scale: this.scale * dpr * inv_resolution_factor });
       if (this.svgElement) this.svgElement.remove();
       this.svgElement = this.buildSVG(viewport, textContent) as SVGElement;
-      this.svgElement.style.zIndex = "100";
+      this.svgElement.style.zIndex = "1";
       this.svgElement.style.fill = "transparent";
       document.getElementById("page-container")!.append(this.svgElement);
     }, 10);
@@ -103,10 +103,11 @@ export class HomeComponent {
   }
 
   private buildSVG(viewport: PageViewport, textContent: TextContent) {
+    const dpr = window.devicePixelRatio || 1;
     // Building SVG with size of the viewport (for simplicity)
     const svg = document.createElementNS(this.SVG_NS, "svg:svg");
-    svg.setAttribute("width", viewport.width + "px");
-    svg.setAttribute("height", viewport.height + "px");
+    svg.setAttribute("width", Math.floor(viewport.width) + "px");
+    svg.setAttribute("height", Math.floor(viewport.height) + "px");
     // items are transformed to have 1px font size
     svg.setAttribute("font-size", "1");
 
@@ -121,12 +122,57 @@ export class HomeComponent {
         [1, 0, 0, -1, 0, 0]
       );
       const style = textContent.styles[textItem.fontName];
+
       // adding text element
       const text = document.createElementNS(this.SVG_NS, "svg:text");
       text.setAttribute("transform", "matrix(" + tx.join(" ") + ")");
       text.setAttribute("font-family", style.fontFamily);
       text.textContent = textItem.str;
       svg.append(text);
+
+      const transform = textItem.transform;
+      const x = transform[4];
+      const y = transform[5];
+      const width = textItem.width;
+      const height = textItem.height;
+      const inv_resolution_factor = 1 / this.resolution_factor;
+      const scale = this.scale * dpr * inv_resolution_factor;
+      const m = [x * scale, this.canvasRef.nativeElement.height - ((y + height) * scale), width * scale, height * scale];
+
+      const ctx = this.canvasRef.nativeElement.getContext("2d")!;
+      ctx.strokeRect(x * scale, this.canvasRef.nativeElement.height - ((y + height) * scale), width * scale, height * scale);
+
+      const box = document.createElementNS(this.SVG_NS, "svg:rect");
+      box.setAttribute("fill", "none");
+      box.setAttribute("width", `${width * scale}`);
+      box.setAttribute("height", `${height * scale}`);
+      box.setAttribute("x", `${x * scale}`);
+      box.setAttribute("y", `${Math.floor(viewport.height) - ((y + height) * scale)}`);
+      // (box as SVGRectElement).style.outline = "1px solid red";
+      (box as SVGRectElement).style.cursor = "pointer";
+      (box as SVGRectElement).style.pointerEvents = "all";
+
+      svg.append(box);
+
+      setTimeout(() => {
+        const clientRect = text.getBoundingClientRect();
+        const currentWidth = clientRect.width;
+        const currentHeight = clientRect.height;
+        const targetWidth = textItem.width * scale;
+        const targetHeight = textItem.height * scale;
+        const alpha = 1;
+        let scaleX = (targetWidth / currentWidth) * alpha + (1 - alpha);
+        let scaleY = (targetHeight / currentHeight) * alpha + (1 - alpha);
+        if (!scale || !scaleY) return;
+        if (currentHeight > currentWidth && textItem.str.length > 3) {
+          console.log(textItem);
+          box.setAttribute("y", `${x * scale}`);
+          box.setAttribute("x", `${Math.floor(viewport.height) - ((y + height) * scale)}`);
+          return;
+        }
+        const scaledTransform = [tx[0] * scaleX, tx[1] * scaleY, tx[2], tx[3], tx[4], tx[5]];
+        text.setAttribute("transform", "matrix(" + scaledTransform.join(" ") + ")");
+      }, 100);
     });
     return svg;
   }
