@@ -81,7 +81,7 @@ export function getParagraphs2(data: TextContent): Paragraph[] {
 
         // At end of line, decide if it's a headline
         if (isEndOfLine && currentParagraph) {
-            if (currentParagraph.matches(/[.!?]$/) || itemText.split(' ').length < 5) {
+            if (itemText.split(' ').length < 5) {
                 currentParagraph.trim();
                 paragraphs.push(currentParagraph);
                 currentParagraph = new Paragraph();

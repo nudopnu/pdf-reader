@@ -106,15 +106,15 @@ export class HomeComponent {
     const dpr = window.devicePixelRatio || 1;
     // Building SVG with size of the viewport (for simplicity)
     const svg = document.createElementNS(this.SVG_NS, "svg:svg");
-    svg.setAttribute("width", Math.floor(viewport.width) + "px");
-    svg.setAttribute("height", Math.floor(viewport.height) + "px");
+    svg.setAttribute("width", `${viewport.width}px`);
+    svg.setAttribute("height", `${viewport.height}px`);
+
     // items are transformed to have 1px font size
     svg.setAttribute("font-size", "1");
 
-
     // processing all items
     textContent.items.forEach((textItem: TextItem | TextMarkedContent) => {
-      if (!isTextItem(textItem)) return;
+      if (!isTextItem(textItem) || textItem.transform[0] === 0) return;
       // we have to take in account viewport transform, which includes scale,
       // rotation and Y-axis flip, and not forgetting to flip text.
       const tx = pdfjsLib.Util.transform(
@@ -163,7 +163,7 @@ export class HomeComponent {
         const alpha = 1;
         let scaleX = (targetWidth / currentWidth) * alpha + (1 - alpha);
         let scaleY = (targetHeight / currentHeight) * alpha + (1 - alpha);
-        if (!scale || !scaleY) return;
+        if (!scaleX || !scaleY || !isFinite(scaleX) || !isFinite(scaleY)) return;
         if (currentHeight > currentWidth && textItem.str.length > 3) {
           console.log(textItem);
           box.setAttribute("y", `${x * scale}`);
@@ -180,10 +180,7 @@ export class HomeComponent {
   private readFile(file: File) {
     return new Promise<Uint8Array>((resolve, reject) => {
       const fileReader = new FileReader();
-      fileReader.onload = () => {
-        const bytes = new Uint8Array(fileReader.result as ArrayBuffer);
-        resolve(bytes);
-      }
+      fileReader.onload = () => resolve(new Uint8Array(fileReader.result as ArrayBuffer));
       fileReader.onerror = reject;
       fileReader.readAsArrayBuffer(file);
     });
