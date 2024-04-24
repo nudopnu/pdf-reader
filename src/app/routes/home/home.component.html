@@ -1,7 +1,7 @@
 <div style="position: fixed; top: 0; z-index: 2;">
-    <input type="file" (change)="onFileChange($event)" accept=".pdf">
+    <input type="file" (change)="onFileInputChange($event)" accept=".pdf">
     <input type="range" #slider (input)="onSliderChange($event)">
 </div>
 <div id="page-container">
-    <canvas #canvas droppable></canvas>
+    <canvas #canvas droppable (onFileDrop)="onFileReceived($event)"></canvas>
 </div>

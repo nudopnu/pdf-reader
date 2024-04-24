@@ -3,6 +3,9 @@ import { PDFDocumentProxy, PDFPageProxy, PageViewport } from 'pdfjs-dist';
 import { TextContent, TextItem, TextMarkedContent } from 'pdfjs-dist/types/src/display/api';
 import { getParagraphs2 } from '../../core/pdfjs/ParagraphDetection';
 import { isTextItem } from '../../core/pdfjs/Utils';
+import { Book, PersistenceService } from '../../services/persistence.service';
+import { toObservable } from "@angular/core/rxjs-interop";
+import { filter } from 'rxjs';
 
 declare const pdfjsLib: any;
 
@@ -25,25 +28,44 @@ export class HomeComponent {
   SVG_NS = "http://www.w3.org/2000/svg";
   svgElement?: SVGElement;
 
-  constructor() {
+  constructor(private persistenceService: PersistenceService) {
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'pdfjs/pdf.worker.min.mjs';
+    toObservable(persistenceService.books).pipe(
+      filter(books => books.length > 0)
+    ).subscribe((books) => {
+      this.documentFromBytes(books[0].file);
+      this.setPage(1);
+    });
   }
 
-  async onFileChange(event: Event) {
+  async onFileInputChange(event: Event) {
     const fileList = (event.target! as HTMLInputElement).files;
     if (!fileList) return;
     const file = fileList[0];
     if (!file) return;
+    await this.onFileReceived(file);
+  }
+
+  async onFileReceived(file: File) {
     const pdfBytes = await this.readFile(file);
-    const pdfDocument = (await pdfjsLib.getDocument(pdfBytes).promise) as PDFDocumentProxy;
-    this.setDocument(pdfDocument);
+    const book = await this.documentFromBytes(pdfBytes);
+    this.persistenceService.addBook(book);
     this.setPage(1);
   }
 
-  private setDocument(pdfDocument: PDFDocumentProxy) {
-    pdfDocument.getMetadata().then(console.log);
+  private async documentFromBytes(pdfBytes: Uint8Array) {
+    const pdfDocument = (await pdfjsLib.getDocument(pdfBytes).promise) as PDFDocumentProxy;
+    const metadata = await pdfDocument.getMetadata();
+    const title = (metadata.info as any).Title;
+    const book = {
+      currentPage: 0,
+      numPages: pdfDocument.numPages,
+      file: (await pdfDocument.getData()),
+      title: title,
+    } as Book;
     this.updateSlider(pdfDocument.numPages);
     this.pdfDocument = pdfDocument;
+    return book;
   }
 
   private updateSlider(numPages: number) {
