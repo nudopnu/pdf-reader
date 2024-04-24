@@ -117,8 +117,8 @@ export class HomeComponent {
     const context = canvas.getContext('2d');
     context!.imageSmoothingQuality = 'high';
 
-    canvas.width = Math.floor(viewport.width * outputScale);
-    canvas.height = Math.floor(viewport.height * outputScale);
+    canvas.width = viewport.width * outputScale;
+    canvas.height = viewport.height * outputScale;
     canvas.style.margin = "auto";
     canvas.style.width = canvas.width * inv_resolution_factor + 'px';
 
@@ -171,7 +171,7 @@ export class HomeComponent {
         height: height * scale,
         width: width * scale,
         x: x * scale,
-        y: Math.floor(viewport.height) - ((y + height) * scale),
+        y: viewport.height - ((y + height) * scale),
       };
       const isVertical = textItem.transform[0] === 0;
       if (isVertical) {
@@ -196,9 +196,6 @@ export class HomeComponent {
         if (!scaleX || !scaleY || !isFinite(scaleX) || !isFinite(scaleY)) return;
         if (isVertical) {
           console.log(textItem, rect);
-          // rect.setAttribute("y", `${x * scale}`);
-          // rect.setAttribute("x", `${Math.floor(viewport.height) - ((y + height) * scale)}`);
-          // return;
         }
         const scaledTransform = [tx[0] * scaleX, tx[1] * scaleY, tx[2], tx[3], tx[4], tx[5]];
         text.setAttribute("transform", "matrix(" + scaledTransform.join(" ") + ")");
