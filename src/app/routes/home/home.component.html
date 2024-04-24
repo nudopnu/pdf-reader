@@ -1,6 +1,6 @@
-<div style="position: fixed; top: 0; z-index: 2;">
+<div style="position: fixed;top: 0;z-index: 2;display: flex;width: 100%;align-items: center;justify-content: center;padding: 16px;">
     <input type="file" (change)="onFileInputChange($event)" accept=".pdf">
-    <input type="range" #slider (input)="onSliderChange($event)">
+    <input type="range" #slider (input)="onSliderChange($event)" style="flex: 0 1 500px">{{currentPage}}
 </div>
 <div id="page-container">
     <canvas #canvas droppable (onFileDrop)="onFileReceived($event)"></canvas>

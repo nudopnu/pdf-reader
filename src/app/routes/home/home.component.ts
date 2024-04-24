@@ -82,6 +82,7 @@ export class HomeComponent {
   private setPage(pageNumber: number) {
     if (this.debounceTimeout) clearTimeout(this.debounceTimeout);
     this.debounceTimeout = setTimeout(async () => {
+      this.currentPage = pageNumber;
       this.textItemToBBox.clear();
       const page = await this.pdfDocument!.getPage(pageNumber);
       await this.renderPage(page);
