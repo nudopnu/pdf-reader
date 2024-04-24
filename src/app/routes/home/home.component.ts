@@ -33,7 +33,8 @@ export class HomeComponent {
     toObservable(persistenceService.books).pipe(
       filter(books => books.length > 0)
     ).subscribe((books) => {
-      this.documentFromBytes(books[0].file);
+      const book = books[0];
+      this.documentFromBytes(book.file, book.title);
       this.setPage(1);
     });
   }
@@ -48,15 +49,15 @@ export class HomeComponent {
 
   async onFileReceived(file: File) {
     const pdfBytes = await this.readFile(file);
-    const book = await this.documentFromBytes(pdfBytes);
+    const book = await this.documentFromBytes(pdfBytes, file.name);
     this.persistenceService.addBook(book);
     this.setPage(1);
   }
 
-  private async documentFromBytes(pdfBytes: Uint8Array) {
+  private async documentFromBytes(pdfBytes: Uint8Array, filename: string) {
     const pdfDocument = (await pdfjsLib.getDocument(pdfBytes).promise) as PDFDocumentProxy;
     const metadata = await pdfDocument.getMetadata();
-    const title = (metadata.info as any).Title;
+    const title = (metadata.info as any).Title || filename;
     const book = {
       currentPage: 0,
       numPages: pdfDocument.numPages,
@@ -121,6 +122,7 @@ export class HomeComponent {
     canvas.height = viewport.height * outputScale;
     canvas.style.margin = "auto";
     canvas.style.width = canvas.width * inv_resolution_factor + 'px';
+    canvas.style.height = 'unset';
 
     const transform = [outputScale, 0, 0, outputScale, 0, 0];
 

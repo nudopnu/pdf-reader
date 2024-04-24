@@ -60,6 +60,7 @@ export class PersistenceService {
 
   addBook(data: Book) {
     if (!this.db) throw Error('DB not initialised.');
+    console.log(`storing`, data);
 
     // Open a read/write DB transaction, ready for adding the data
     const transaction = this.db.transaction(this.OBJECT_STORE_NAME, 'readwrite');
@@ -89,7 +90,7 @@ export class PersistenceService {
     if (!this.db) throw Error('DB not initialised.');
 
     // Open a database transaction and delete the task, finding it by the name we retrieved above
-    const transaction = this.db.transaction([this.OBJECT_STORE_NAME], 'readwrite');
+    const transaction = this.db.transaction(this.OBJECT_STORE_NAME, 'readwrite');
     transaction.objectStore(this.OBJECT_STORE_NAME).delete(book.title);
 
     // Report that the data item has been deleted
@@ -101,7 +102,7 @@ export class PersistenceService {
   getAllBooks() {
     if (!this.db) throw Error('DB not initialised.');
     const result = [] as Book[];
-    const transaction = this.db.transaction([this.OBJECT_STORE_NAME], 'readonly');
+    const transaction = this.db.transaction(this.OBJECT_STORE_NAME, 'readonly');
     const objectStore = transaction.objectStore(this.OBJECT_STORE_NAME);
     const request = objectStore.openCursor();
 
