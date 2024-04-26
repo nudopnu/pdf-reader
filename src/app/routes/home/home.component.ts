@@ -6,6 +6,7 @@ import { isTextItem } from '../../core/pdfjs/Utils';
 import { Book, PersistenceService } from '../../services/persistence.service';
 import { toObservable } from "@angular/core/rxjs-interop";
 import { filter } from 'rxjs';
+import { debounced, hashBytes } from '../../core/Utils';
 
 declare const pdfjsLib: any;
 
@@ -21,22 +22,29 @@ export class HomeComponent {
   @Input() scale = 1;
   @Input() resolution_factor = 2;
 
+  book?: Book | undefined;
   pdfDocument?: PDFDocumentProxy;
   textItemToBBox = new Map<TextItem, { x: number, y: number, width: number, height: number, rect: SVGRectElement }>();
   debounceTimeout?: NodeJS.Timeout;
   currentPage = 1;
   SVG_NS = "http://www.w3.org/2000/svg";
   svgElement?: SVGElement;
+  debouncedPageupdate: (...args: any[]) => void;
 
   constructor(private persistenceService: PersistenceService) {
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'pdfjs/pdf.worker.min.mjs';
     toObservable(persistenceService.books).pipe(
       filter(books => books.length > 0)
     ).subscribe((books) => {
-      const book = books[0];
-      this.documentFromBytes(book.file, book.title);
+      this.book = books[0];
+      this.documentFromBytes(this.book.file, this.book.title);
       this.setPage(1);
     });
+
+    this.debouncedPageupdate = debounced((book: Book, newPageNumber: number) => {
+      console.log(`Updating `, book, newPageNumber);
+      // persistenceService.updateBook({ ...book, currentPage: newPageNumber });
+    }, 3000);
   }
 
   async onFileInputChange(event: Event) {
@@ -55,13 +63,14 @@ export class HomeComponent {
   }
 
   private async documentFromBytes(pdfBytes: Uint8Array, filename: string) {
+    const hash = await hashBytes(pdfBytes);
     const pdfDocument = (await pdfjsLib.getDocument(pdfBytes).promise) as PDFDocumentProxy;
     const metadata = await pdfDocument.getMetadata();
     const title = (metadata.info as any).Title || filename;
     const book = {
-      currentPage: 0,
+      hash,
       numPages: pdfDocument.numPages,
-      file: (await pdfDocument.getData()),
+      file: pdfBytes,
       title: title,
     } as Book;
     this.updateSlider(pdfDocument.numPages);
@@ -83,6 +92,7 @@ export class HomeComponent {
   private setPage(pageNumber: number) {
     if (this.debounceTimeout) clearTimeout(this.debounceTimeout);
     this.debounceTimeout = setTimeout(async () => {
+      this.debouncedPageupdate(this.book, pageNumber);
       this.currentPage = pageNumber;
       this.textItemToBBox.clear();
       const page = await this.pdfDocument!.getPage(pageNumber);
