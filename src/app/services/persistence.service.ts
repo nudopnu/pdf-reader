@@ -7,6 +7,12 @@ export interface Book {
   numPages: number;
 }
 
+export interface Progress {
+  bookHash: string;
+  currentPage: number;
+  currentTextItem: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -20,7 +26,7 @@ export class PersistenceService {
   private PROGRESS_OBJECT_STORE = 'progress';
 
   constructor() {
-    const dBOpenRequest = window.indexedDB.open(this.DB_NAME, 3);
+    const dBOpenRequest = window.indexedDB.open(this.DB_NAME, 4);
 
     dBOpenRequest.onerror = (event) => {
       console.error('Error loading database.');
@@ -49,20 +55,28 @@ export class PersistenceService {
       };
 
       // Create an objectStore for this database
-      const objectStore = this.db!.createObjectStore(this.BOOKS_OBJECT_STORE, { keyPath: 'title' });
+      const bookObjectStore = this.db!.createObjectStore(this.BOOKS_OBJECT_STORE, { keyPath: 'hash' });
+      const progressObjectStore = this.db!.createObjectStore(this.PROGRESS_OBJECT_STORE, { keyPath: 'bookHash' });
 
       // Define what data items the objectStore will contain
-      objectStore.createIndex('file', 'file', { unique: false });
-      objectStore.createIndex('numPages', 'numPages', { unique: false });
-      objectStore.createIndex('currentPage', 'currentPage', { unique: false });
-      console.log('Object store created.');
+      bookObjectStore.createIndex('file', 'file', { unique: false });
+      bookObjectStore.createIndex('numPages', 'numPages', { unique: false });
+      bookObjectStore.createIndex('currentPage', 'currentPage', { unique: false });
+      console.log('Object stores created.');
     };
   }
 
-  async addBook(data: Book) {
-    return await this.singleOperationOnObjectStore(this.BOOKS_OBJECT_STORE, 'readwrite', (objectStore) =>
-      objectStore.add(data)
-    );
+  async addBook(book: Book) {
+    return await new Promise<void>((resolve, reject) => {
+      if (!this.db) throw Error('DB not initialised.');
+      const transaction = this.db.transaction([this.BOOKS_OBJECT_STORE, this.PROGRESS_OBJECT_STORE], 'readwrite');
+      const bookObjectStore = transaction.objectStore(this.BOOKS_OBJECT_STORE);
+      const progressObjectStore = transaction.objectStore(this.PROGRESS_OBJECT_STORE);
+      const progress = { bookHash: book.hash, currentPage: 0, currentTextItem: 0 } as Progress;
+      bookObjectStore.add(book);
+      progressObjectStore.add(progress);
+      transaction.oncomplete = () => resolve();
+    });
   }
 
   async deleteBook(book: Book) {
@@ -74,6 +88,18 @@ export class PersistenceService {
   async updateBook(book: Book) {
     return await this.singleOperationOnObjectStore(this.BOOKS_OBJECT_STORE, 'readwrite', (objectStore) =>
       objectStore.put(book)
+    );
+  }
+
+  async updateProgress(progress: Progress) {
+    return await this.singleOperationOnObjectStore(this.PROGRESS_OBJECT_STORE, 'readwrite', (objectStore) =>
+      objectStore.put(progress)
+    );
+  }
+
+  async getProgress(hash: string): Promise<Progress> {
+    return await this.singleOperationOnObjectStore(this.PROGRESS_OBJECT_STORE, 'readonly', (objectStore) =>
+      objectStore.get(hash)
     );
   }
 
@@ -95,6 +121,21 @@ export class PersistenceService {
       request.onerror = () => reject(request.error);
       transaction.onerror = () => reject(transaction.error);
       request.onsuccess = () => resolve(request.result!);
+    });
+  }
+
+  private multiOperationOnObjectStore(name: string, mode: IDBTransactionMode, operations: Array<(objectStore: IDBObjectStore) => IDBRequest<any>>) {
+    return new Promise<void>((resolve, reject) => {
+      if (!this.db) throw Error('DB not initialised.');
+      const transaction = this.db.transaction(name, mode);
+      const objectStore = transaction.objectStore(name);
+      operations.forEach(operation => {
+        const request = operation(objectStore);
+        request.onerror = () => reject(request.error);
+      });
+
+      transaction.onerror = () => reject(transaction.error);
+      transaction.oncomplete = () => resolve();
     });
   }
 

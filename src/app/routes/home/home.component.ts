@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { PDFDocumentProxy, PDFPageProxy, PageViewport } from 'pdfjs-dist';
+import { PDFDocumentProxy, PDFPageProxy, PageViewport, updateTextLayer } from 'pdfjs-dist';
 import { TextContent, TextItem, TextMarkedContent } from 'pdfjs-dist/types/src/display/api';
 import { getParagraphs2 } from '../../core/pdfjs/ParagraphDetection';
 import { isTextItem } from '../../core/pdfjs/Utils';
@@ -35,16 +35,17 @@ export class HomeComponent {
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'pdfjs/pdf.worker.min.mjs';
     toObservable(persistenceService.books).pipe(
       filter(books => books.length > 0)
-    ).subscribe((books) => {
+    ).subscribe(async (books) => {
       this.book = books[0];
-      this.documentFromBytes(this.book.file, this.book.title);
-      this.setPage(1);
+      const { currentPage } = await persistenceService.getProgress(this.book.hash)
+      this.documentFromBytes(this.book.file, this.book.title, currentPage);
+      this.setPage(currentPage);
     });
 
     this.debouncedPageupdate = debounced((book: Book, newPageNumber: number) => {
       console.log(`Updating `, book, newPageNumber);
-      // persistenceService.updateBook({ ...book, currentPage: newPageNumber });
-    }, 3000);
+      persistenceService.updateProgress({ bookHash: book.hash, currentPage: newPageNumber, currentTextItem: 0 });
+    }, 1000);
   }
 
   async onFileInputChange(event: Event) {
@@ -57,12 +58,12 @@ export class HomeComponent {
 
   async onFileReceived(file: File) {
     const pdfBytes = await this.readFile(file);
-    const book = await this.documentFromBytes(pdfBytes, file.name);
-    this.persistenceService.addBook(book);
+    this.book = await this.documentFromBytes(pdfBytes, file.name);
+    this.persistenceService.addBook(this.book);
     this.setPage(1);
   }
 
-  private async documentFromBytes(pdfBytes: Uint8Array, filename: string) {
+  private async documentFromBytes(pdfBytes: Uint8Array, filename: string, currentPage = 1) {
     const hash = await hashBytes(pdfBytes);
     const pdfDocument = (await pdfjsLib.getDocument(pdfBytes).promise) as PDFDocumentProxy;
     const metadata = await pdfDocument.getMetadata();
@@ -70,18 +71,18 @@ export class HomeComponent {
     const book = {
       hash,
       numPages: pdfDocument.numPages,
-      file: pdfBytes,
+      file: (await pdfDocument.getData()),
       title: title,
     } as Book;
-    this.updateSlider(pdfDocument.numPages);
+    this.updateSlider(pdfDocument.numPages, currentPage);
     this.pdfDocument = pdfDocument;
     return book;
   }
 
-  private updateSlider(numPages: number) {
+  private updateSlider(numPages: number, value = 1) {
     this.sliderRef!.nativeElement.setAttribute('max', `${numPages}`);
     this.sliderRef!.nativeElement.setAttribute('min', "1");
-    this.sliderRef!.nativeElement.setAttribute('value', "1");
+    this.sliderRef!.nativeElement.setAttribute('value', `${value}`);
   }
 
   async onSliderChange(event: Event) {
@@ -196,6 +197,10 @@ export class HomeComponent {
       rect.style.pointerEvents = "all";
       this.textItemToBBox.set(textItem, { ...bbox, rect });
       svg.append(rect);
+
+      rect.addEventListener('click', () => {
+        console.log(textItem);
+      })
 
       setTimeout(() => {
         const clientRect = text.getBoundingClientRect();
