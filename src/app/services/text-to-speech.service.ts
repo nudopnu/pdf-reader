@@ -13,6 +13,7 @@ export class TextToSpeechService {
   }
 
   speak(text: string, callback: () => void) {
+    this.isSpeaking.set(false);
     window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.onboundary = function (event) {
@@ -22,16 +23,17 @@ export class TextToSpeechService {
       this.isSpeaking.set(false);
       callback();
     };
-    window.speechSynthesis.speak(utterance);
     this.isSpeaking.set(true);
+    window.speechSynthesis.speak(utterance);
   }
 
   pause() {
+    this.isSpeaking.set(false);
     window.speechSynthesis.pause();
-    this.isSpeaking.set(true);
   }
 
   resume() {
+    this.isSpeaking.set(true);
     window.speechSynthesis.resume();
   }
 

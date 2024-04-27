@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component, ComponentRef, ElementRef, Input, ViewChild } from '@angular/core';
 import { PDFDocumentProxy, PDFPageProxy, PageViewport, updateTextLayer } from 'pdfjs-dist';
 import { TextContent, TextItem, TextMarkedContent } from 'pdfjs-dist/types/src/display/api';
 import { getParagraphs2, getPreFilter } from '../../core/pdfjs/ParagraphDetection';
@@ -9,6 +9,7 @@ import { filter } from 'rxjs';
 import { debounced, hashBytes } from '../../core/Utils';
 import { TextToSpeechService } from '../../services/text-to-speech.service';
 import { Paragraph } from '../../core/pdfjs/Paragraph';
+import { SliderComponent } from '../../components/slider/slider.component';
 
 declare const pdfjsLib: any;
 
@@ -20,7 +21,7 @@ declare const pdfjsLib: any;
 export class HomeComponent {
 
   @ViewChild('canvas') canvasRef!: ElementRef<HTMLCanvasElement>;
-  @ViewChild('slider') sliderRef!: ElementRef<HTMLInputElement>;
+  @ViewChild(SliderComponent) sliderRef!: SliderComponent;
   @Input() scale = 1;
   @Input() resolution_factor = 2;
 
@@ -108,13 +109,13 @@ export class HomeComponent {
   }
 
   private updateSlider(numPages: number, value = 1) {
-    this.sliderRef!.nativeElement.setAttribute('max', `${numPages}`);
-    this.sliderRef!.nativeElement.setAttribute('min', "1");
-    this.sliderRef!.nativeElement.setAttribute('value', `${value}`);
+    this.sliderRef.max = numPages;
+    this.sliderRef.min = 1;
+    this.sliderRef.value = value;
   }
 
-  async onSliderChange(event: Event) {
-    const pageNumber = parseInt((event.target! as HTMLInputElement).value);
+  async onSliderChange(newValue: number) {
+    const pageNumber = newValue;
     this.setPage(pageNumber);
   }
 

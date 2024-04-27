@@ -5,18 +5,39 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './routes/home/home.component';
 import { DroppableDirective } from './directives/droppable.directive';
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { en_US } from 'ng-zorro-antd/i18n';
+import { CommonModule, registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
+import { FormsModule } from '@angular/forms';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideHttpClient } from '@angular/common/http';
+import { ZorroModule } from './modules/zorro/zorro.module';
+import { SliderComponent } from './components/slider/slider.component';
+import { PlaycontrolsComponent } from './components/playcontrols/playcontrols.component';
+
+registerLocaleData(en);
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    DroppableDirective
+    DroppableDirective,
+    SliderComponent,
+    PlaycontrolsComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ZorroModule,
+    CommonModule,
   ],
-  providers: [],
+  providers: [
+    { provide: NZ_I18N, useValue: en_US },
+    provideAnimationsAsync(),
+    provideHttpClient()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
