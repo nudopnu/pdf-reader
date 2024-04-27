@@ -1,43 +1,7 @@
+import { PDFDocumentProxy } from "pdfjs-dist";
 import { TextContent, TextItem } from "pdfjs-dist/types/src/display/api";
-import { isTextItem } from "./Utils";
-
-export class Paragraph {
-
-    fullText: string = "";
-    textItems: TextItem[] = [];
-
-    constructor(
-        textItem?: TextItem,
-    ) {
-        if (!textItem) return;
-        this.append(textItem);
-    }
-
-    append(textItem: TextItem) {
-        this.fullText += textItem.str;
-        this.textItems.push(textItem);
-    }
-
-    isEmpty() {
-        return this.fullText === "";
-    }
-
-    endsWith(searchString: string, endPosition?: number | undefined) {
-        return this.fullText.endsWith(searchString, endPosition);
-    }
-
-    matches(regex: RegExp) {
-        return regex.test(this.fullText);
-    }
-
-    updateText(update: (fullText: string) => string) {
-        this.fullText = update(this.fullText);
-    }
-
-    trim() {
-        this.fullText.trim();
-    }
-};
+import { Paragraph } from "./Paragraph";
+import { OPS, isTextItem } from "./Utils";
 
 export function getParagraphs2(data: TextContent): Paragraph[] {
     const paragraphs = [] as Paragraph[];
@@ -95,4 +59,87 @@ export function getParagraphs2(data: TextContent): Paragraph[] {
     }
 
     return paragraphs;
+}
+
+// export async function getPrefilter(document: PDFDocumentProxy) {
+//     const limit = Math.min(document.numPages, 10);
+//     const allTextItems = [] as TextItem[];
+//     const coordMap = new Map<string, number[]>();
+
+//     let id = 0;
+//     for (let i = 1; i < limit; i++) {
+//         const page = await document.getPage(i);
+//         const textContent = await page.getTextContent();
+//         const items = textContent.items.filter(item => isTextItem(item)) as TextItem[];
+//         for (let j = 0; j < items.length; j++) {
+//             const item = items[j];
+//             if (!isTextItem(item) || item.str.trim() === "" || item.transform[0] === 0) continue;
+//             if (/^[0-9]+$/.test(item.str.trim())) {
+//                 allTextItems.push(item)
+//             }
+//         }
+//     }
+//     console.log(allTextItems.map(i => [i.str, i.transform[5]]));
+
+
+//     return (textItem: TextItem) => true;
+// }
+export async function getPreFilter(document: PDFDocumentProxy) {
+    const limit = Math.min(document.numPages, 10);
+    const allTextItems = [] as TextItem[];
+    const allPageNumberItems = new Map<string, TextItem[]>();
+    const coordMap = new Map<string, number[]>();
+    let maxY = 0;
+
+    let id = 0;
+    for (let i = 1; i < limit; i++) {
+        const page = await document.getPage(i + Math.round(document.numPages / 4));
+        // const page = await document.getPage(i);
+        const textContent = await page.getTextContent();
+        const items = textContent.items.filter(item => isTextItem(item)) as TextItem[];
+
+        for (let j = 0; j < items.length; j++) {
+            const item = items[j];
+            if (!isTextItem(item) || item.str.trim() === "" || item.transform[0] === 0) continue;
+            if (/^([0-9]+)$/.test(item.str.trim())) {
+                const key = Math.round(item.transform[5]) + "";
+                if (!allPageNumberItems.has(key)) {
+                    allPageNumberItems.set(key, [item]);
+                } else {
+                    const oldValue = allPageNumberItems.get(key)!;
+                    allPageNumberItems.set(key, [...oldValue, item]);
+                }
+            }
+            allTextItems.push(item);
+            let { width, height, transform } = item;
+            let [scaleX, skewX, skewY, scaleY, x, y] = transform;
+            if (y > maxY) maxY = y;
+            [x, y, width, height] = [x, y, width, height].map(x => Math.round(Math.round(x * 100) / 10000));
+            const key = Math.round(Math.round(item.height * 100) / 100) + "";
+            if (coordMap.has(key)) {
+                coordMap.set(key, [...coordMap.get(key)!, id++]);
+            } else {
+                coordMap.set(key, [id++]);
+            }
+
+        }
+    }
+
+
+    // console.log(allPageNumberItems);
+    let pageNumberItems = [...allPageNumberItems.entries()].sort((a, b) => b[1].length - a[0].length);
+    pageNumberItems = pageNumberItems.filter(([a, b]) => b.length > 5)
+
+    if (pageNumberItems.length > 0) {
+        const limit = parseInt(pageNumberItems[0][0]);
+        // return (textItem: TextItem) => Math.round(Math.round(textItem.transform[5] * 100) / 100) !== limit;
+        if (limit < maxY / 2) {
+            return (textItem: TextItem) => Math.round(Math.round(textItem.transform[5] * 100) / 100) > limit;
+        } else {
+            return (textItem: TextItem) => Math.round(Math.round(textItem.transform[5] * 100) / 100) < limit;
+        }
+    }
+    return (textItem: TextItem) => true;
+
+    // return (textItem: TextItem) => Math.round(Math.round(textItem.height * 100) / 100) == mostOccuringHeight;
 }

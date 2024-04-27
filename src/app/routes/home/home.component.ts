@@ -1,8 +1,8 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { PDFDocumentProxy, PDFPageProxy, PageViewport, updateTextLayer } from 'pdfjs-dist';
 import { TextContent, TextItem, TextMarkedContent } from 'pdfjs-dist/types/src/display/api';
-import { getParagraphs2 } from '../../core/pdfjs/ParagraphDetection';
-import { isTextItem } from '../../core/pdfjs/Utils';
+import { getParagraphs2, getPreFilter } from '../../core/pdfjs/ParagraphDetection';
+import { OPS, isTextItem } from '../../core/pdfjs/Utils';
 import { Book, PersistenceService } from '../../services/persistence.service';
 import { toObservable } from "@angular/core/rxjs-interop";
 import { filter } from 'rxjs';
@@ -30,6 +30,7 @@ export class HomeComponent {
   SVG_NS = "http://www.w3.org/2000/svg";
   svgElement?: SVGElement;
   debouncedPageupdate: (...args: any[]) => void;
+  prefilter: ((textItem: TextItem) => boolean) | undefined;
 
   constructor(private persistenceService: PersistenceService) {
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'pdfjs/pdf.worker.min.mjs';
@@ -37,7 +38,7 @@ export class HomeComponent {
       filter(books => books.length > 0)
     ).subscribe(async (books) => {
       this.book = books[0];
-      const { currentPage } = await persistenceService.getProgress(this.book.hash)
+      const { currentPage } = await persistenceService.getProgress(this.book.hash);
       this.documentFromBytes(this.book.file, this.book.title, currentPage);
       this.setPage(currentPage);
     });
@@ -67,6 +68,8 @@ export class HomeComponent {
     const hash = await hashBytes(pdfBytes);
     const pdfDocument = (await pdfjsLib.getDocument(pdfBytes).promise) as PDFDocumentProxy;
     const metadata = await pdfDocument.getMetadata();
+    console.log(metadata);
+
     const title = (metadata.info as any).Title || filename;
     const book = {
       hash,
@@ -76,6 +79,7 @@ export class HomeComponent {
     } as Book;
     this.updateSlider(pdfDocument.numPages, currentPage);
     this.pdfDocument = pdfDocument;
+    this.prefilter = await getPreFilter(this.pdfDocument!);
     return book;
   }
 
@@ -98,6 +102,24 @@ export class HomeComponent {
       this.textItemToBBox.clear();
       const page = await this.pdfDocument!.getPage(pageNumber);
       await this.renderPage(page);
+
+      const { fnArray, argsArray } = (await page.getOperatorList());
+      for (let k = 0; k < fnArray.length; k++) {
+        if (argsArray[k]?.length > 0) {
+          if ([44, 41].some(token => token === fnArray[k])) continue;
+          const CONSTRUCT_PATH = 91;
+          const RECT = 19;
+          if (fnArray[k] === CONSTRUCT_PATH) {
+            // argsArray[k][0][0] === RECT
+            // console.log(`page ${pageNumber}.${k}`, (OPS as any)[fnArray[k]], argsArray[k]);
+          }
+          // if ([85, 91].some(token => token === fnArray[k])) {
+          // }
+          // console.log(`page ${i + Math.round(document.numPages / 4)}`, fnArray[k], argsArray[k]);
+        }
+      }
+      console.log(fnArray, argsArray);
+
 
       const textContent = await page.getTextContent();
       console.log(textContent);
@@ -192,7 +214,10 @@ export class HomeComponent {
       }
       const rect = this.createRect(bbox);
       rect.setAttribute("fill", "none");
-      // rect.style.outline = "1px solid red";
+      if ((this.prefilter && this.prefilter(textItem))) {
+
+        rect.style.outline = "1px solid red";
+      }
       rect.style.cursor = "pointer";
       rect.style.pointerEvents = "all";
       this.textItemToBBox.set(textItem, { ...bbox, rect });
