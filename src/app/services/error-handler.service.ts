@@ -11,6 +11,7 @@ export class ErrorHandlerService implements ErrorHandler {
   }
 
   createNotification(type: string, error: any): void {
+    console.error(error);
     this.notification.create(
       type,
       'An Error occured',
