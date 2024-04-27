@@ -1,3 +1,5 @@
+import * as crypto from 'crypto'
+
 export const debounced = (callback: (...args: any[]) => any, time: number) => {
     let lastFunc: ReturnType<typeof setTimeout> | undefined;
 

@@ -6,6 +6,7 @@ import { UserOutline, CaretRightFill, StepBackwardFill, StepForwardFill, PauseOu
 import { NzSliderModule } from 'ng-zorro-antd/slider';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
 
 
 const icons: IconDefinition[] = [
@@ -26,6 +27,7 @@ const icons: IconDefinition[] = [
     NzSliderModule,
     NzInputModule,
     NzInputNumberModule,
+    NzNotificationModule,
   ]
 })
 export class ZorroModule { }

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -15,6 +15,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { ZorroModule } from './modules/zorro/zorro.module';
 import { SliderComponent } from './components/slider/slider.component';
 import { PlaycontrolsComponent } from './components/playcontrols/playcontrols.component';
+import { ErrorHandlerService } from './services/error-handler.service';
 
 registerLocaleData(en);
 
@@ -35,8 +36,9 @@ registerLocaleData(en);
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
+    { provide: ErrorHandler, useClass: ErrorHandlerService },
     provideAnimationsAsync(),
-    provideHttpClient()
+    provideHttpClient(),
   ],
   bootstrap: [AppComponent]
 })
