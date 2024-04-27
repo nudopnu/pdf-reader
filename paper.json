@@ -1,0 +1,2090 @@
+{
+    "items": [
+        {
+            "str": "Automated Unit Test Improvement using Large Language Models",
+            "dir": "ltr",
+            "width": 505.00842222599994,
+            "height": 17.2154,
+            "transform": [
+                17.043246,
+                0,
+                0,
+                17.2154,
+                53.196,
+                696.375
+            ],
+            "fontName": "g_d0_f1",
+            "hasEOL": true
+        },
+        {
+            "str": "at Meta",
+            "dir": "ltr",
+            "width": 58.85945260000001,
+            "height": 17.2154,
+            "transform": [
+                17.2154,
+                0,
+                0,
+                17.2154,
+                276.57,
+                676.45
+            ],
+            "fontName": "g_d0_f1",
+            "hasEOL": false
+        },
+        {
+            "str": "",
+            "dir": "ltr",
+            "width": 0,
+            "height": 0,
+            "transform": [
+                11.9552,
+                0,
+                0,
+                11.9552,
+                261.30899999999997,
+                656.609
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "Nadia Alshahwan",
+            "dir": "ltr",
+            "width": 86.89039360000001,
+            "height": 11.9552,
+            "transform": [
+                11.9552,
+                0,
+                0,
+                11.9552,
+                261.30899999999997,
+                656.609
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": false
+        },
+        {
+            "str": "∗",
+            "dir": "ltr",
+            "width": 2.9895811,
+            "height": 8.7671,
+            "transform": [
+                8.7671,
+                0,
+                0,
+                8.7671,
+                348.19899999999996,
+                660.9490000000001
+            ],
+            "fontName": "g_d0_f3",
+            "hasEOL": false
+        },
+        {
+            "str": "",
+            "dir": "ltr",
+            "width": 0,
+            "height": 0,
+            "transform": [
+                11.9552,
+                0,
+                0,
+                11.9552,
+                273.239,
+                642.6610000000001
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "Jubin Chheda",
+            "dir": "ltr",
+            "width": 66.3274496,
+            "height": 11.9552,
+            "transform": [
+                11.9552,
+                0,
+                0,
+                11.9552,
+                273.239,
+                642.6610000000001
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "Anastasia Finegenova",
+            "dir": "ltr",
+            "width": 106.52083200000001,
+            "height": 11.9552,
+            "transform": [
+                11.9552,
+                0,
+                0,
+                11.9552,
+                253.02899999999997,
+                628.714
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "Beliz Gokkaya",
+            "dir": "ltr",
+            "width": 70.36830720000003,
+            "height": 11.9552,
+            "transform": [
+                11.9552,
+                0,
+                0,
+                11.9552,
+                271.31399999999996,
+                614.7660000000001
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "Mark Harman",
+            "dir": "ltr",
+            "width": 69.07714560000002,
+            "height": 11.9552,
+            "transform": [
+                11.9552,
+                0,
+                0,
+                11.9552,
+                271.96,
+                600.8180000000001
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "Inna Harper",
+            "dir": "ltr",
+            "width": 59.680358399999996,
+            "height": 11.9552,
+            "transform": [
+                11.9552,
+                0,
+                0,
+                11.9552,
+                276.772,
+                586.8710000000001
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "Alexandru Marginean",
+            "dir": "ltr",
+            "width": 107.28596480000002,
+            "height": 11.9552,
+            "transform": [
+                11.9552,
+                0,
+                0,
+                11.9552,
+                252.646,
+                572.9230000000001
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "Shubho Sengupta",
+            "dir": "ltr",
+            "width": 85.31230720000002,
+            "height": 11.9552,
+            "transform": [
+                11.9552,
+                0,
+                0,
+                11.9552,
+                263.842,
+                558.9750000000001
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "Eddy Wang",
+            "dir": "ltr",
+            "width": 56.476364800000034,
+            "height": 11.9552,
+            "transform": [
+                11.9552,
+                0,
+                0,
+                11.9552,
+                278.26,
+                545.0280000000001
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": false
+        },
+        {
+            "str": "",
+            "dir": "ltr",
+            "width": 0,
+            "height": 0,
+            "transform": [
+                9.9626,
+                0,
+                0,
+                9.9626,
+                266.09,
+                533.0720000000001
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "Meta Platforms Inc.,",
+            "dir": "ltr",
+            "width": 81.91249720000002,
+            "height": 9.9626,
+            "transform": [
+                9.9626,
+                0,
+                0,
+                9.9626,
+                266.09,
+                533.0720000000001
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "Menlo Park, California, USA",
+            "dir": "ltr",
+            "width": 115.59604780000004,
+            "height": 9.9626,
+            "transform": [
+                9.9626,
+                0,
+                0,
+                9.9626,
+                248.87399999999997,
+                521.1170000000001
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": false
+        },
+        {
+            "str": "",
+            "dir": "ltr",
+            "width": 0,
+            "height": 0,
+            "transform": [
+                10.9091,
+                0,
+                0,
+                10.9091,
+                53.79799999999997,
+                502.1530000000001
+            ],
+            "fontName": "g_d0_f4",
+            "hasEOL": true
+        },
+        {
+            "str": "ABSTRACT",
+            "dir": "ltr",
+            "width": 58.145503000000005,
+            "height": 10.9091,
+            "transform": [
+                10.9091,
+                0,
+                0,
+                10.9091,
+                53.79799999999997,
+                502.1530000000001
+            ],
+            "fontName": "g_d0_f4",
+            "hasEOL": false
+        },
+        {
+            "str": "",
+            "dir": "ltr",
+            "width": 0,
+            "height": 0,
+            "transform": [
+                9.0650304,
+                0,
+                0,
+                8.9664,
+                53.529,
+                488.455
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "This paper describes Meta’s TestGen-LLM tool, which uses LLMs",
+            "dir": "ltr",
+            "width": 240.51338657280002,
+            "height": 8.9664,
+            "transform": [
+                9.0650304,
+                0,
+                0,
+                8.9664,
+                53.529,
+                488.455
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "to automatically improve existing human-written tests. TestGen-",
+            "dir": "ltr",
+            "width": 241.75817395200008,
+            "height": 8.9664,
+            "transform": [
+                9.145728,
+                0,
+                0,
+                8.9664,
+                53.798,
+                477.496
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "LLM verifies that its generated test classes successfully clear a set",
+            "dir": "ltr",
+            "width": 240.24699482880007,
+            "height": 8.9664,
+            "transform": [
+                8.9932992,
+                0,
+                0,
+                8.9664,
+                53.798,
+                466.537
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "of filters that assure measurable improvement over the original",
+            "dir": "ltr",
+            "width": 240.24912883200022,
+            "height": 8.9664,
+            "transform": [
+                9.145728,
+                0,
+                0,
+                8.9664,
+                53.798,
+                455.578
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "test suite, thereby eliminating problems due to LLM hallucination.",
+            "dir": "ltr",
+            "width": 241.62651133440002,
+            "height": 8.9664,
+            "transform": [
+                8.9484672,
+                0,
+                0,
+                8.9664,
+                53.798,
+                444.619
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "We describe the deployment of TestGen-LLM at Meta test-a-thons",
+            "dir": "ltr",
+            "width": 240.67713993600015,
+            "height": 8.9664,
+            "transform": [
+                8.921568,
+                0,
+                0,
+                8.9664,
+                53.368,
+                433.66
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "for the Instagram and Facebook platforms. In an evaluation on",
+            "dir": "ltr",
+            "width": 240.24912883200008,
+            "height": 8.9664,
+            "transform": [
+                9.145728,
+                0,
+                0,
+                8.9664,
+                53.798,
+                422.701
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "Reels and Stories products for Instagram, 75% of TestGen-LLM’s",
+            "dir": "ltr",
+            "width": 240.2491288320001,
+            "height": 8.9664,
+            "transform": [
+                9.145728,
+                0,
+                0,
+                8.9664,
+                53.798,
+                411.742
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "test cases built correctly, 57% passed reliably, and 25% increased",
+            "dir": "ltr",
+            "width": 240.24912883200003,
+            "height": 8.9664,
+            "transform": [
+                9.145728,
+                0,
+                0,
+                8.9664,
+                53.798,
+                400.784
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "coverage. During Meta’s Instagram and Facebook test-a-thons, it",
+            "dir": "ltr",
+            "width": 240.2452912128001,
+            "height": 8.9664,
+            "transform": [
+                9.1098624,
+                0,
+                0,
+                8.9664,
+                53.798,
+                389.825
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "improved 11.5% of all classes to which it was applied, with 73% of",
+            "dir": "ltr",
+            "width": 240.24346206720003,
+            "height": 8.9664,
+            "transform": [
+                9.0022656,
+                0,
+                0,
+                8.9664,
+                53.798,
+                378.866
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "its recommendations being accepted for production deployment",
+            "dir": "ltr",
+            "width": 240.24912883200008,
+            "height": 8.9664,
+            "transform": [
+                9.145728,
+                0,
+                0,
+                8.9664,
+                53.798,
+                367.907
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "by Meta software engineers. We believe this is the first report on",
+            "dir": "ltr",
+            "width": 240.24529121280005,
+            "height": 8.9664,
+            "transform": [
+                9.1098624,
+                0,
+                0,
+                8.9664,
+                53.798,
+                356.948
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "industrial scale deployment of LLM-generated code backed by such",
+            "dir": "ltr",
+            "width": 240.2473355520001,
+            "height": 8.9664,
+            "transform": [
+                8.787072,
+                0,
+                0,
+                8.9664,
+                53.798,
+                345.989
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "assurances of code improvement.",
+            "dir": "ltr",
+            "width": 121.51265280000003,
+            "height": 8.9664,
+            "transform": [
+                8.9664,
+                0,
+                0,
+                8.9664,
+                53.798,
+                335.03
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": false
+        },
+        {
+            "str": "",
+            "dir": "ltr",
+            "width": 0,
+            "height": 0,
+            "transform": [
+                10.9091,
+                0,
+                0,
+                10.9091,
+                53.798,
+                313.046
+            ],
+            "fontName": "g_d0_f4",
+            "hasEOL": true
+        },
+        {
+            "str": "KEYWORDS",
+            "dir": "ltr",
+            "width": 61.86550610000001,
+            "height": 10.9091,
+            "transform": [
+                10.9091,
+                0,
+                0,
+                10.9091,
+                53.798,
+                313.046
+            ],
+            "fontName": "g_d0_f4",
+            "hasEOL": false
+        },
+        {
+            "str": "",
+            "dir": "ltr",
+            "width": 0,
+            "height": 0,
+            "transform": [
+                8.8498368,
+                0,
+                0,
+                8.9664,
+                53.798,
+                299.347
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "Unit Testing, Automated Test Generation, Large Language Models,",
+            "dir": "ltr",
+            "width": 241.22885149440015,
+            "height": 8.9664,
+            "transform": [
+                8.8498368,
+                0,
+                0,
+                8.9664,
+                53.798,
+                299.347
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "LLMs, Genetic Improvement.",
+            "dir": "ltr",
+            "width": 106.33253760000004,
+            "height": 8.9664,
+            "transform": [
+                8.9664,
+                0,
+                0,
+                8.9664,
+                53.798,
+                288.388
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": false
+        },
+        {
+            "str": "",
+            "dir": "ltr",
+            "width": 0,
+            "height": 0,
+            "transform": [
+                7.9701,
+                0,
+                0,
+                7.9701,
+                53.503,
+                273.02299999999997
+            ],
+            "fontName": "g_d0_f4",
+            "hasEOL": true
+        },
+        {
+            "str": "ACM Reference Format:",
+            "dir": "ltr",
+            "width": 86.9936415,
+            "height": 7.9701,
+            "transform": [
+                7.9701,
+                0,
+                0,
+                7.9701,
+                53.503,
+                273.02299999999997
+            ],
+            "fontName": "g_d0_f4",
+            "hasEOL": false
+        },
+        {
+            "str": "",
+            "dir": "ltr",
+            "width": 0,
+            "height": 0,
+            "transform": [
+                8.129502,
+                0,
+                0,
+                7.9701,
+                53.798,
+                263.06
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "Nadia Alshahwan, Jubin Chheda, Anastasia Finegenova, Beliz Gokkaya,",
+            "dir": "ltr",
+            "width": 241.12102931999988,
+            "height": 7.9701,
+            "transform": [
+                8.129502,
+                0,
+                0,
+                7.9701,
+                53.798,
+                263.06
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "Mark Harman, Inna Harper, Alexandru Marginean, Shubho Sengupta, and Eddy",
+            "dir": "ltr",
+            "width": 249.00505223999994,
+            "height": 7.9701,
+            "transform": [
+                7.810698,
+                0,
+                0,
+                7.9701,
+                53.798,
+                253.098
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "Wang. 2024. Automated Unit Test Improvement using Large Language Mod-",
+            "dir": "ltr",
+            "width": 241.97542403999995,
+            "height": 7.9701,
+            "transform": [
+                7.810698,
+                0,
+                0,
+                7.9701,
+                53.416,
+                243.135
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "els at Meta. In",
+            "dir": "ltr",
+            "width": 45.71854988579999,
+            "height": 7.9701,
+            "transform": [
+                7.962129900000001,
+                0,
+                0,
+                7.9701,
+                53.798,
+                233.172
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": false
+        },
+        {
+            "str": " ",
+            "dir": "ltr",
+            "width": 1.9894395537537553,
+            "height": 0,
+            "transform": [
+                7.962129900000001,
+                0,
+                0,
+                7.9701,
+                99.5165498858,
+                233.172
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": false
+        },
+        {
+            "str": "Proceedings of the 32nd ACM Symposium on the Foundations",
+            "dir": "ltr",
+            "width": 192.54022524180004,
+            "height": 7.9701,
+            "transform": [
+                7.962129900000001,
+                0,
+                0,
+                7.9701,
+                101.504,
+                233.172
+            ],
+            "fontName": "g_d0_f5",
+            "hasEOL": true
+        },
+        {
+            "str": "of Software Engineering (FSE ’24), November 15–19, 2024, Porto de Galinhas,",
+            "dir": "ltr",
+            "width": 241.1156734128001,
+            "height": 7.9701,
+            "transform": [
+                8.0019804,
+                0,
+                0,
+                7.9701,
+                53.798,
+                223.21
+            ],
+            "fontName": "g_d0_f5",
+            "hasEOL": true
+        },
+        {
+            "str": "Brazil.",
+            "dir": "ltr",
+            "width": 21.470014782000007,
+            "height": 7.9701,
+            "transform": [
+                8.129502,
+                0,
+                0,
+                7.9701,
+                53.798,
+                213.247
+            ],
+            "fontName": "g_d0_f5",
+            "hasEOL": false
+        },
+        {
+            "str": " ",
+            "dir": "ltr",
+            "width": 2.686260017647046,
+            "height": 0,
+            "transform": [
+                8.129502,
+                0,
+                0,
+                7.9701,
+                75.26801478200001,
+                213.247
+            ],
+            "fontName": "g_d0_f5",
+            "hasEOL": false
+        },
+        {
+            "str": "ACM, New York, NY, USA, 12 pages. https://doi.org/XXXXXXX.",
+            "dir": "ltr",
+            "width": 217.26094095000016,
+            "height": 7.9701,
+            "transform": [
+                8.129502,
+                0,
+                0,
+                7.9701,
+                78.008,
+                213.247
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "XXXXXXX",
+            "dir": "ltr",
+            "width": 36.821862,
+            "height": 7.9701,
+            "transform": [
+                7.9701,
+                0,
+                0,
+                7.9701,
+                53.535,
+                203.285
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": false
+        },
+        {
+            "str": "",
+            "dir": "ltr",
+            "width": 0,
+            "height": 0,
+            "transform": [
+                5.4795,
+                0,
+                0,
+                5.4795,
+                53.798,
+                188.442
+            ],
+            "fontName": "g_d0_f3",
+            "hasEOL": true
+        },
+        {
+            "str": "∗",
+            "dir": "ltr",
+            "width": 1.8685095,
+            "height": 5.4795,
+            "transform": [
+                5.4795,
+                0,
+                0,
+                5.4795,
+                53.798,
+                188.442
+            ],
+            "fontName": "g_d0_f3",
+            "hasEOL": false
+        },
+        {
+            "str": "Author order is alphabetical. The corresponding author is Mark Harman.",
+            "dir": "ltr",
+            "width": 207.6239735999999,
+            "height": 6.9738,
+            "transform": [
+                6.9738,
+                0,
+                0,
+                6.9738,
+                56.165,
+                185.80200000000002
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "Permission to make digital or hard copies of all or part of this work for personal or",
+            "dir": "ltr",
+            "width": 240.37893586800018,
+            "height": 6.9738,
+            "transform": [
+                7.113276,
+                0,
+                0,
+                6.9738,
+                53.798,
+                165.948
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "classroom use is granted without fee provided that copies are not made or distributed",
+            "dir": "ltr",
+            "width": 240.24639182520008,
+            "height": 6.9738,
+            "transform": [
+                6.8761668,
+                0,
+                0,
+                6.9738,
+                53.798,
+                157.978
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "for profit or commercial advantage and that copies bear this notice and the full citation",
+            "dir": "ltr",
+            "width": 240.24699157199993,
+            "height": 6.9738,
+            "transform": [
+                6.834324,
+                0,
+                0,
+                6.9738,
+                53.798,
+                150.008
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "on the first page. Copyrights for components of this work owned by others than the",
+            "dir": "ltr",
+            "width": 240.25016465100012,
+            "height": 6.9738,
+            "transform": [
+                7.008668999999999,
+                0,
+                0,
+                6.9738,
+                53.798,
+                142.037
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "author(s) must be honored. Abstracting with credit is permitted. To copy otherwise, or",
+            "dir": "ltr",
+            "width": 240.3768437279999,
+            "height": 6.9738,
+            "transform": [
+                6.834324,
+                0,
+                0,
+                6.9738,
+                53.798,
+                134.067
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "republish, to post on servers or to redistribute to lists, requires prior specific permission",
+            "dir": "ltr",
+            "width": 240.24699157199993,
+            "height": 6.9738,
+            "transform": [
+                6.834324,
+                0,
+                0,
+                6.9738,
+                53.798,
+                126.097
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "and/or a fee. Request permissions from permissions@acm.org.",
+            "dir": "ltr",
+            "width": 177.9783497999999,
+            "height": 6.9738,
+            "transform": [
+                6.9738,
+                0,
+                0,
+                6.9738,
+                53.798,
+                118.127
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": false
+        },
+        {
+            "str": "",
+            "dir": "ltr",
+            "width": 0,
+            "height": 0,
+            "transform": [
+                6.9738,
+                0,
+                0,
+                6.9738,
+                53.798,
+                109.36
+            ],
+            "fontName": "g_d0_f5",
+            "hasEOL": true
+        },
+        {
+            "str": "FSE ’24, Mon 15 - Fri 19 July 2024, Porto de Galinhas, Brazil, Brazil",
+            "dir": "ltr",
+            "width": 184.37332439999994,
+            "height": 6.9738,
+            "transform": [
+                6.9738,
+                0,
+                0,
+                6.9738,
+                53.798,
+                109.36
+            ],
+            "fontName": "g_d0_f5",
+            "hasEOL": false
+        },
+        {
+            "str": "",
+            "dir": "ltr",
+            "width": 0,
+            "height": 0,
+            "transform": [
+                6.9738,
+                0,
+                0,
+                6.9738,
+                53.317,
+                100.593
+            ],
+            "fontName": "g_d0_f3",
+            "hasEOL": true
+        },
+        {
+            "str": "©",
+            "dir": "ltr",
+            "width": 4.846791,
+            "height": 6.9738,
+            "transform": [
+                6.9738,
+                0,
+                0,
+                6.9738,
+                53.317,
+                100.593
+            ],
+            "fontName": "g_d0_f3",
+            "hasEOL": false
+        },
+        {
+            "str": " ",
+            "dir": "ltr",
+            "width": 1.7432089999999931,
+            "height": 0,
+            "transform": [
+                6.9738,
+                0,
+                0,
+                6.9738,
+                58.163791,
+                100.593
+            ],
+            "fontName": "g_d0_f3",
+            "hasEOL": false
+        },
+        {
+            "str": "2024 Copyright held by the owner/author(s). Publication rights licensed to ACM.",
+            "dir": "ltr",
+            "width": 229.65420779999994,
+            "height": 6.9738,
+            "transform": [
+                6.9738,
+                0,
+                0,
+                6.9738,
+                59.907,
+                100.593
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "ACM ISBN 978-1-4503-XXXX-X/18/06",
+            "dir": "ltr",
+            "width": 108.57509220000003,
+            "height": 6.9738,
+            "transform": [
+                6.9738,
+                0,
+                0,
+                6.9738,
+                53.553999999999995,
+                92.623
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "https://doi.org/XXXXXXX.XXXXXXX",
+            "dir": "ltr",
+            "width": 108.93772980000006,
+            "height": 6.9738,
+            "transform": [
+                6.9738,
+                0,
+                0,
+                6.9738,
+                53.797999999999995,
+                84.653
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": false
+        },
+        {
+            "str": "",
+            "dir": "ltr",
+            "width": 0,
+            "height": 0,
+            "transform": [
+                10.9091,
+                0,
+                0,
+                10.9091,
+                317.955,
+                502.153
+            ],
+            "fontName": "g_d0_f4",
+            "hasEOL": true
+        },
+        {
+            "str": "1",
+            "dir": "ltr",
+            "width": 5.607277400000001,
+            "height": 10.9091,
+            "transform": [
+                10.9091,
+                0,
+                0,
+                10.9091,
+                317.955,
+                502.153
+            ],
+            "fontName": "g_d0_f4",
+            "hasEOL": false
+        },
+        {
+            "str": " ",
+            "dir": "ltr",
+            "width": 10.909100000000024,
+            "height": 0,
+            "transform": [
+                10.9091,
+                0,
+                0,
+                10.9091,
+                323.56227739999997,
+                502.153
+            ],
+            "fontName": "g_d0_f4",
+            "hasEOL": false
+        },
+        {
+            "str": "INTRODUCTION",
+            "dir": "ltr",
+            "width": 86.2146173,
+            "height": 10.9091,
+            "transform": [
+                10.9091,
+                0,
+                0,
+                10.9091,
+                334.4713774,
+                502.153
+            ],
+            "fontName": "g_d0_f4",
+            "hasEOL": false
+        },
+        {
+            "str": "",
+            "dir": "ltr",
+            "width": 0,
+            "height": 0,
+            "transform": [
+                9.145728,
+                0,
+                0,
+                8.9664,
+                317.641,
+                488.455
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "As part of our overall mission to automate unit test generation",
+            "dir": "ltr",
+            "width": 240.56008358400015,
+            "height": 8.9664,
+            "transform": [
+                9.145728,
+                0,
+                0,
+                8.9664,
+                317.641,
+                488.455
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "for Android code, we have developed an automated test class im-",
+            "dir": "ltr",
+            "width": 241.75838914560006,
+            "height": 8.9664,
+            "transform": [
+                9.1188288,
+                0,
+                0,
+                8.9664,
+                317.955,
+                477.496
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "prover, TestGen-LLM. TestGen-LLM uses two of Meta’s",
+            "dir": "ltr",
+            "width": 212.1168695040001,
+            "height": 8.9664,
+            "transform": [
+                9.145728,
+                0,
+                0,
+                8.9664,
+                317.955,
+                466.537
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": false
+        },
+        {
+            "str": "1",
+            "dir": "ltr",
+            "width": 3.3818055000000005,
+            "height": 7.2727,
+            "transform": [
+                7.2727,
+                0,
+                0,
+                7.2727,
+                530.073,
+                469.792
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": false
+        },
+        {
+            "str": " ",
+            "dir": "ltr",
+            "width": 3.675194499999975,
+            "height": 0,
+            "transform": [
+                7.2727,
+                0,
+                0,
+                7.2727,
+                533.4548055,
+                469.792
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": false
+        },
+        {
+            "str": "Large",
+            "dir": "ltr",
+            "width": 21.071757312000003,
+            "height": 8.9664,
+            "transform": [
+                9.145728,
+                0,
+                0,
+                8.9664,
+                537.13,
+                466.537
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "Language Models (LLMs) to extend existing, human-written, Kotlin",
+            "dir": "ltr",
+            "width": 240.24733555199998,
+            "height": 8.9664,
+            "transform": [
+                8.787072,
+                0,
+                0,
+                8.9664,
+                317.955,
+                455.578
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "test classes by generating additional test cases that cover previ-",
+            "dir": "ltr",
+            "width": 241.75817395200025,
+            "height": 8.9664,
+            "transform": [
+                9.145728,
+                0,
+                0,
+                8.9664,
+                317.955,
+                444.619
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "ously missed corner cases, and that increase overall test coverage.",
+            "dir": "ltr",
+            "width": 241.62717484800024,
+            "height": 8.9664,
+            "transform": [
+                9.011232,
+                0,
+                0,
+                8.9664,
+                317.955,
+                433.66
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "TestGen-LLM is an example of Assured Offline LLM-Based Software",
+            "dir": "ltr",
+            "width": 240.51973478400015,
+            "height": 8.9664,
+            "transform": [
+                8.787072,
+                0,
+                0,
+                8.9664,
+                317.686,
+                422.701
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "Engineering (Assured Offline LLMSE) [6].",
+            "dir": "ltr",
+            "width": 152.41983360000006,
+            "height": 8.9664,
+            "transform": [
+                8.9664,
+                0,
+                0,
+                8.9664,
+                317.955,
+                411.742
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "That is, unlike other LLM-based code and test generation tech-",
+            "dir": "ltr",
+            "width": 231.80095088640016,
+            "height": 8.9664,
+            "transform": [
+                9.0381312,
+                0,
+                0,
+                8.9664,
+                327.918,
+                400.784
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "niques, TestGen–LLM uses Assured Offline LLMSE to embed the",
+            "dir": "ltr",
+            "width": 240.24912883199994,
+            "height": 8.9664,
+            "transform": [
+                9.145728,
+                0,
+                0,
+                8.9664,
+                317.955,
+                389.825
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "language models, as a service, in a larger software engineering",
+            "dir": "ltr",
+            "width": 240.2491288320003,
+            "height": 8.9664,
+            "transform": [
+                9.145728,
+                0,
+                0,
+                8.9664,
+                317.955,
+                378.866
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "workflow that ultimately recommends fully formed software im-",
+            "dir": "ltr",
+            "width": 242.09656588800024,
+            "height": 8.9664,
+            "transform": [
+                9.145728,
+                0,
+                0,
+                8.9664,
+                317.623,
+                367.907
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "provements rather than smaller code snippets. These fully-formed",
+            "dir": "ltr",
+            "width": 240.24678860160006,
+            "height": 8.9664,
+            "transform": [
+                8.9036352,
+                0,
+                0,
+                8.9664,
+                317.955,
+                356.948
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "code improvements are backed by verifiable guarantees for im-",
+            "dir": "ltr",
+            "width": 241.7581739520002,
+            "height": 8.9664,
+            "transform": [
+                9.145728,
+                0,
+                0,
+                8.9664,
+                317.955,
+                345.989
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "provement and non-regression of existing behavior. A filtration",
+            "dir": "ltr",
+            "width": 240.24912883200017,
+            "height": 8.9664,
+            "transform": [
+                9.145728,
+                0,
+                0,
+                8.9664,
+                317.955,
+                335.03
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "process discards any test case that cannot be guaranteed to meet",
+            "dir": "ltr",
+            "width": 240.25114627200034,
+            "height": 8.9664,
+            "transform": [
+                9.1367616,
+                0,
+                0,
+                8.9664,
+                317.955,
+                324.071
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "the assurances.",
+            "dir": "ltr",
+            "width": 55.367520000000006,
+            "height": 8.9664,
+            "transform": [
+                8.9664,
+                0,
+                0,
+                8.9664,
+                317.955,
+                313.112
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "The filtration process can be used to evaluate the performance of",
+            "dir": "ltr",
+            "width": 230.28279590400018,
+            "height": 8.9664,
+            "transform": [
+                8.787072,
+                0,
+                0,
+                8.9664,
+                327.918,
+                302.153
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "a particular LLM, prompt strategy, or choice of hyper-parameters.",
+            "dir": "ltr",
+            "width": 241.6319629056001,
+            "height": 8.9664,
+            "transform": [
+                8.9932992,
+                0,
+                0,
+                8.9664,
+                317.955,
+                291.194
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "For this reason, we include telemetry to log the behavior of every",
+            "dir": "ltr",
+            "width": 240.47752097279994,
+            "height": 8.9664,
+            "transform": [
+                9.0022656,
+                0,
+                0,
+                8.9664,
+                317.955,
+                280.236
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "execution so that we can evaluate different choices. However, the",
+            "dir": "ltr",
+            "width": 240.2439641856004,
+            "height": 8.9664,
+            "transform": [
+                9.0201984,
+                0,
+                0,
+                8.9664,
+                317.955,
+                269.277
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "same infrastructure can also be used as a kind of ensemble learning",
+            "dir": "ltr",
+            "width": 240.24733555199998,
+            "height": 8.9664,
+            "transform": [
+                8.787072,
+                0,
+                0,
+                8.9664,
+                317.955,
+                258.318
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "approach to find test class improvement recommendations. TestGen-",
+            "dir": "ltr",
+            "width": 241.75871193600005,
+            "height": 8.9664,
+            "transform": [
+                8.787072,
+                0,
+                0,
+                8.9664,
+                317.955,
+                247.359
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "LLM thus has two use cases:",
+            "dir": "ltr",
+            "width": 103.83091200000005,
+            "height": 8.9664,
+            "transform": [
+                8.9664,
+                0,
+                0,
+                8.9664,
+                317.955,
+                236.4
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "(1)",
+            "dir": "ltr",
+            "width": 9.5133504,
+            "height": 8.9664,
+            "transform": [
+                8.9664,
+                0,
+                0,
+                8.9664,
+                328.865,
+                222.489
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": false
+        },
+        {
+            "str": " ",
+            "dir": "ltr",
+            "width": 3.985649599999988,
+            "height": 0,
+            "transform": [
+                8.9664,
+                0,
+                0,
+                8.9664,
+                338.3783504,
+                222.489
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": false
+        },
+        {
+            "str": "Evaluation",
+            "dir": "ltr",
+            "width": 43.232394240000005,
+            "height": 8.9664,
+            "transform": [
+                8.787072,
+                0,
+                0,
+                8.9664,
+                342.364,
+                222.489
+            ],
+            "fontName": "g_d0_f4",
+            "hasEOL": false
+        },
+        {
+            "str": ": To evaluate the effects of different LLMs, prompt-",
+            "dir": "ltr",
+            "width": 176.65529548799995,
+            "height": 8.9664,
+            "transform": [
+                8.787072,
+                0,
+                0,
+                8.9664,
+                385.596,
+                222.489
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "ing strategies, and hyper-parameters on the automatically",
+            "dir": "ltr",
+            "width": 216.067824,
+            "height": 8.9664,
+            "transform": [
+                9.145728,
+                0,
+                0,
+                8.9664,
+                342.364,
+                211.53
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "measurable and verifiable improvements they make to exist-",
+            "dir": "ltr",
+            "width": 217.35154348799995,
+            "height": 8.9664,
+            "transform": [
+                8.8050048,
+                0,
+                0,
+                8.9664,
+                342.364,
+                200.571
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "ing code.",
+            "dir": "ltr",
+            "width": 32.86185600000001,
+            "height": 8.9664,
+            "transform": [
+                8.9664,
+                0,
+                0,
+                8.9664,
+                342.364,
+                189.612
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "(2)",
+            "dir": "ltr",
+            "width": 9.5133504,
+            "height": 8.9664,
+            "transform": [
+                8.9664,
+                0,
+                0,
+                8.9664,
+                328.86499999999995,
+                178.653
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": false
+        },
+        {
+            "str": " ",
+            "dir": "ltr",
+            "width": 3.9856496000000448,
+            "height": 0,
+            "transform": [
+                8.9664,
+                0,
+                0,
+                8.9664,
+                338.37835039999993,
+                178.653
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": false
+        },
+        {
+            "str": "Deployment",
+            "dir": "ltr",
+            "width": 51.206931072000025,
+            "height": 8.9664,
+            "transform": [
+                9.145728,
+                0,
+                0,
+                8.9664,
+                342.364,
+                178.653
+            ],
+            "fontName": "g_d0_f4",
+            "hasEOL": false
+        },
+        {
+            "str": ": To fully automate human-independent test",
+            "dir": "ltr",
+            "width": 164.632249728,
+            "height": 8.9664,
+            "transform": [
+                9.145728,
+                0,
+                0,
+                8.9664,
+                393.572,
+                178.653
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "class improvement, using a collection of LLMs, prompting",
+            "dir": "ltr",
+            "width": 215.83584529919992,
+            "height": 8.9664,
+            "transform": [
+                9.1277952,
+                0,
+                0,
+                8.9664,
+                342.364,
+                167.694
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "strategies, and hyper-parameters to automatically produce",
+            "dir": "ltr",
+            "width": 215.83961118720003,
+            "height": 8.9664,
+            "transform": [
+                9.0381312,
+                0,
+                0,
+                8.9664,
+                342.364,
+                156.735
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "code improvement recommendations that are backed by",
+            "dir": "ltr",
+            "width": 205.52782080000011,
+            "height": 8.9664,
+            "transform": [
+                8.9664,
+                0,
+                0,
+                8.9664,
+                342.364,
+                145.776
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": false
+        },
+        {
+            "str": "",
+            "dir": "ltr",
+            "width": 0,
+            "height": 0,
+            "transform": [
+                5.4795,
+                0,
+                0,
+                5.4795,
+                317.829,
+                127.394
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "1",
+            "dir": "ltr",
+            "width": 2.5479675,
+            "height": 5.4795,
+            "transform": [
+                5.4795,
+                0,
+                0,
+                5.4795,
+                317.829,
+                127.394
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": false
+        },
+        {
+            "str": "The two LLMs used by TestGen-LLM were constructed at Meta for general purpose",
+            "dir": "ltr",
+            "width": 237.53479009259985,
+            "height": 6.9738,
+            "transform": [
+                6.980773799999999,
+                0,
+                0,
+                6.9738,
+                320.666,
+                124.754
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "internal use, but they are not the focus of this paper, which is about an LLM-agnostic",
+            "dir": "ltr",
+            "width": 240.24833751539984,
+            "height": 6.9738,
+            "transform": [
+                6.9110358,
+                0,
+                0,
+                6.9738,
+                317.955,
+                116.784
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "ensemble approach, its application to test class improvement at Meta and our experi-",
+            "dir": "ltr",
+            "width": 241.42336005120006,
+            "height": 6.9738,
+            "transform": [
+                6.9598524,
+                0,
+                0,
+                6.9738,
+                317.955,
+                108.814
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "ence with it at Meta’s Test-a-thons. Because details are commercially sensitive (and",
+            "dir": "ltr",
+            "width": 240.24821198700008,
+            "height": 6.9738,
+            "transform": [
+                7.0784069999999994,
+                0,
+                0,
+                6.9738,
+                317.955,
+                100.844
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "not relevant to this paper), we do not give details of the two LLMs, simply calling them",
+            "dir": "ltr",
+            "width": 240.24699157199967,
+            "height": 6.9738,
+            "transform": [
+                6.834324,
+                0,
+                0,
+                6.9738,
+                317.955,
+                92.874
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": true
+        },
+        {
+            "str": "‘LLM1’ and ‘LLM2’ in this paper.",
+            "dir": "ltr",
+            "width": 93.14904659999999,
+            "height": 6.9738,
+            "transform": [
+                6.9738,
+                0,
+                0,
+                6.9738,
+                317.397,
+                84.653
+            ],
+            "fontName": "g_d0_f2",
+            "hasEOL": false
+        },
+        {
+            "str": "",
+            "dir": "ltr",
+            "width": 0,
+            "height": 0,
+            "transform": [
+                0,
+                20,
+                -20,
+                0,
+                32,
+                232
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": true
+        },
+        {
+            "str": "arXiv:2402.09171v1 [cs.SE] 14 Feb 2024",
+            "dir": "ltr",
+            "width": 344.41999999999996,
+            "height": 20,
+            "transform": [
+                0,
+                20,
+                -20,
+                0,
+                32,
+                232
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": false
+        }
+    ],
+    "styles": {
+        "g_d0_f1": {
+            "fontFamily": "sans-serif",
+            "ascent": 0.693,
+            "descent": -0.235,
+            "vertical": false
+        },
+        "g_d0_f2": {
+            "fontFamily": "sans-serif",
+            "ascent": 0.701,
+            "descent": -0.233,
+            "vertical": false
+        },
+        "g_d0_f3": {
+            "fontFamily": "sans-serif",
+            "ascent": 0.701,
+            "descent": -0.233,
+            "vertical": false
+        },
+        "g_d0_f4": {
+            "fontFamily": "sans-serif",
+            "ascent": 0.714,
+            "descent": -0.231,
+            "vertical": false
+        },
+        "g_d0_f5": {
+            "fontFamily": "sans-serif",
+            "ascent": 0.696,
+            "descent": -0.234,
+            "vertical": false
+        },
+        "g_d0_f6": {
+            "fontFamily": "serif",
+            "ascent": 0.683,
+            "descent": -0.217,
+            "vertical": false
+        }
+    }
+}

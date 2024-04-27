@@ -1,0 +1,896 @@
+{
+    "items": [
+        {
+            "str": "Chapter 9 I System Design and Scalability",
+            "dir": "ltr",
+            "width": 220.02600000000032,
+            "height": 11,
+            "transform": [
+                11,
+                0,
+                0,
+                11,
+                88.56,
+                681.81
+            ],
+            "fontName": "g_d0_f5",
+            "hasEOL": false
+        },
+        {
+            "str": "",
+            "dir": "ltr",
+            "width": 0,
+            "height": 0,
+            "transform": [
+                9,
+                0,
+                0,
+                9,
+                89.24000000000004,
+                652.0799999999999
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": true
+        },
+        {
+            "str": "can continue using (with modifications) the approach you outlined in Step 1, but occasionally you will need",
+            "dir": "ltr",
+            "width": 407.7417999999999,
+            "height": 9,
+            "transform": [
+                9,
+                0,
+                0,
+                9,
+                89.24000000000004,
+                652.0799999999999
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": true
+        },
+        {
+            "str": "to fundamentally alter the approach.",
+            "dir": "ltr",
+            "width": 141.30079999999995,
+            "height": 9,
+            "transform": [
+                9,
+                0,
+                0,
+                9,
+                89.27000000000004,
+                639.66
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": true
+        },
+        {
+            "str": "Note that an iterative approach is typically useful. That is, once you have solved the problems from Step 3,",
+            "dir": "ltr",
+            "width": 407.61600000000004,
+            "height": 9,
+            "transform": [
+                9,
+                0,
+                0,
+                9,
+                89.52000000000004,
+                621.0799999999999
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": true
+        },
+        {
+            "str": "new problems may have emerged, and you must tackle those as well.",
+            "dir": "ltr",
+            "width": 266.16900000000004,
+            "height": 9,
+            "transform": [
+                9,
+                0,
+                0,
+                9,
+                89.39000000000004,
+                608.6899999999999
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": true
+        },
+        {
+            "str": "Your goal is not to re-architect a complex system that companies have spent millions of dollars building,",
+            "dir": "ltr",
+            "width": 407.5845999999997,
+            "height": 9,
+            "transform": [
+                9,
+                0,
+                0,
+                9,
+                89.52000000000004,
+                590.2199999999999
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": true
+        },
+        {
+            "str": "but rather to demonstrate that you can analyze and solve problems. Poking holes in your own solution is a",
+            "dir": "ltr",
+            "width": 407.83599999999984,
+            "height": 9,
+            "transform": [
+                9,
+                0,
+                0,
+                9,
+                89.71999999999997,
+                577.8899999999999
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": true
+        },
+        {
+            "str": "fantastic way to demonstrate this.",
+            "dir": "ltr",
+            "width": 129.85000000000005,
+            "height": 9,
+            "transform": [
+                9,
+                0,
+                0,
+                9,
+                89.78999999999996,
+                565.8499999999999
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": false
+        },
+        {
+            "str": "",
+            "dir": "ltr",
+            "width": 0,
+            "height": 0,
+            "transform": [
+                10,
+                0,
+                0,
+                10,
+                90.23999999999997,
+                530.7699999999999
+            ],
+            "fontName": "g_d0_f7",
+            "hasEOL": true
+        },
+        {
+            "str": "� Key Concepts",
+            "dir": "ltr",
+            "width": 76.34950000000003,
+            "height": 10,
+            "transform": [
+                10,
+                0,
+                0,
+                10,
+                90.23999999999997,
+                530.7699999999999
+            ],
+            "fontName": "g_d0_f7",
+            "hasEOL": false
+        },
+        {
+            "str": "",
+            "dir": "ltr",
+            "width": 0,
+            "height": 0,
+            "transform": [
+                9,
+                0,
+                0,
+                9,
+                90.23999999999995,
+                510.10999999999984
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": true
+        },
+        {
+            "str": "While system design questions aren't really tests of what you know, certain concepts can make things a lot",
+            "dir": "ltr",
+            "width": 407.7404000000001,
+            "height": 9,
+            "transform": [
+                9,
+                0,
+                0,
+                9,
+                90.23999999999995,
+                510.10999999999984
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": true
+        },
+        {
+            "str": "easier. We will give a brief overview here. All of these are deep, complex topics, so we encourage you to use",
+            "dir": "ltr",
+            "width": 407.8877999999999,
+            "height": 9,
+            "transform": [
+                9,
+                0,
+                0,
+                9,
+                90.21999999999997,
+                498.01999999999987
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": true
+        },
+        {
+            "str": "online resources for more research.",
+            "dir": "ltr",
+            "width": 134.65060000000017,
+            "height": 9,
+            "transform": [
+                9,
+                0,
+                0,
+                9,
+                90.48999999999995,
+                485.9399999999999
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": false
+        },
+        {
+            "str": "",
+            "dir": "ltr",
+            "width": 0,
+            "height": 0,
+            "transform": [
+                8,
+                0,
+                0,
+                8,
+                90.71999999999998,
+                457.7199999999999
+            ],
+            "fontName": "g_d0_f8",
+            "hasEOL": true
+        },
+        {
+            "str": "Horizontal vs. Vertical Scaling",
+            "dir": "ltr",
+            "width": 121.45319999999995,
+            "height": 8,
+            "transform": [
+                8,
+                0,
+                0,
+                8,
+                90.71999999999998,
+                457.7199999999999
+            ],
+            "fontName": "g_d0_f8",
+            "hasEOL": false
+        },
+        {
+            "str": "",
+            "dir": "ltr",
+            "width": 0,
+            "height": 0,
+            "transform": [
+                9,
+                0,
+                0,
+                9,
+                90.48999999999997,
+                439.5899999999999
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": true
+        },
+        {
+            "str": "A system can be scaled one of two ways.",
+            "dir": "ltr",
+            "width": 155.08139999999992,
+            "height": 9,
+            "transform": [
+                9,
+                0,
+                0,
+                9,
+                90.48999999999997,
+                439.5899999999999
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": true
+        },
+        {
+            "str": "Vertical scaling means increasing the resources of a specific node. For example, you might add addi",
+            "dir": "ltr",
+            "width": 392.3217999999998,
+            "height": 9,
+            "transform": [
+                9,
+                0,
+                0,
+                9,
+                103.02999999999996,
+                422.3999999999999
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": true
+        },
+        {
+            "str": "tional memory to a server to improve its ability to handle load changes.",
+            "dir": "ltr",
+            "width": 273.6837000000001,
+            "height": 9,
+            "transform": [
+                9,
+                0,
+                0,
+                9,
+                102.94999999999993,
+                410.31999999999994
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": true
+        },
+        {
+            "str": "Horizontal scaling means increasing the number of nodes. For example, you might add additional",
+            "dir": "ltr",
+            "width": 395.0099000000001,
+            "height": 9,
+            "transform": [
+                9,
+                0,
+                0,
+                9,
+                103.43999999999994,
+                393.56999999999994
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": true
+        },
+        {
+            "str": "servers, thus decreasing the load on any one server.",
+            "dir": "ltr",
+            "width": 197.64179999999982,
+            "height": 9,
+            "transform": [
+                9,
+                0,
+                0,
+                9,
+                103.11000000000001,
+                381.22999999999996
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": true
+        },
+        {
+            "str": "Vertical scaling is generally easier than horizontal scaling, but it's limited. You can only add so much memory",
+            "dir": "ltr",
+            "width": 407.8170000000003,
+            "height": 9,
+            "transform": [
+                9,
+                0,
+                0,
+                9,
+                90.49000000000007,
+                363.42999999999995
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": true
+        },
+        {
+            "str": "or disk space.",
+            "dir": "ltr",
+            "width": 51.35599999999998,
+            "height": 9,
+            "transform": [
+                9,
+                0,
+                0,
+                9,
+                90.73000000000013,
+                350.97999999999996
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": false
+        },
+        {
+            "str": "",
+            "dir": "ltr",
+            "width": 0,
+            "height": 0,
+            "transform": [
+                8,
+                0,
+                0,
+                8,
+                90.81000000000014,
+                323.23999999999995
+            ],
+            "fontName": "g_d0_f8",
+            "hasEOL": true
+        },
+        {
+            "str": "Load Balancer",
+            "dir": "ltr",
+            "width": 58.54760000000002,
+            "height": 8,
+            "transform": [
+                8,
+                0,
+                0,
+                8,
+                90.81000000000014,
+                323.23999999999995
+            ],
+            "fontName": "g_d0_f8",
+            "hasEOL": false
+        },
+        {
+            "str": "",
+            "dir": "ltr",
+            "width": 0,
+            "height": 0,
+            "transform": [
+                9,
+                0,
+                0,
+                9,
+                90.22000000000014,
+                306.04999999999995
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": true
+        },
+        {
+            "str": "Typically, some frontend parts of a scalable website will be thrown behind a load balancer. This allows a",
+            "dir": "ltr",
+            "width": 408.51859999999994,
+            "height": 9,
+            "transform": [
+                9,
+                0,
+                0,
+                9,
+                90.22000000000014,
+                306.04999999999995
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": true
+        },
+        {
+            "str": "system to distribute the load evenly so that one server doesn't crash and take down the whole system. To",
+            "dir": "ltr",
+            "width": 407.74239999999986,
+            "height": 9,
+            "transform": [
+                9,
+                0,
+                0,
+                9,
+                90.63000000000011,
+                293.98999999999995
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": true
+        },
+        {
+            "str": "do so, of course, you have to build out a network of cloned servers that all have essentially the same code",
+            "dir": "ltr",
+            "width": 407.8001999999999,
+            "height": 9,
+            "transform": [
+                9,
+                0,
+                0,
+                9,
+                90.55000000000007,
+                281.78
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": true
+        },
+        {
+            "str": "and access to the same data.",
+            "dir": "ltr",
+            "width": 109.80059999999996,
+            "height": 9,
+            "transform": [
+                9,
+                0,
+                0,
+                9,
+                90.44000000000017,
+                269.58
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": false
+        },
+        {
+            "str": "",
+            "dir": "ltr",
+            "width": 0,
+            "height": 0,
+            "transform": [
+                8,
+                0,
+                0,
+                8,
+                91.18000000000019,
+                241.63
+            ],
+            "fontName": "g_d0_f8",
+            "hasEOL": true
+        },
+        {
+            "str": "Database Denormalization and NoSQL",
+            "dir": "ltr",
+            "width": 157.31760000000003,
+            "height": 8,
+            "transform": [
+                8,
+                0,
+                0,
+                8,
+                91.18000000000019,
+                241.63
+            ],
+            "fontName": "g_d0_f8",
+            "hasEOL": false
+        },
+        {
+            "str": "",
+            "dir": "ltr",
+            "width": 0,
+            "height": 0,
+            "transform": [
+                9,
+                0,
+                0,
+                9,
+                90.24000000000021,
+                223.38
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": true
+        },
+        {
+            "str": "Joins in a relational database such as SQL can get very slow as the system grows bigger. For this reason, you",
+            "dir": "ltr",
+            "width": 408.4487999999999,
+            "height": 9,
+            "transform": [
+                9,
+                0,
+                0,
+                9,
+                90.24000000000021,
+                223.38
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": true
+        },
+        {
+            "str": "would generally avoid them.",
+            "dir": "ltr",
+            "width": 109.56220000000003,
+            "height": 9,
+            "transform": [
+                9,
+                0,
+                0,
+                9,
+                90.62000000000029,
+                211.38
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": true
+        },
+        {
+            "str": "Denormalization is one part of this. Denormalization means adding redundant information into a database",
+            "dir": "ltr",
+            "width": 408.0096,
+            "height": 9,
+            "transform": [
+                9,
+                0,
+                0,
+                9,
+                90.72000000000028,
+                193.09
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": true
+        },
+        {
+            "str": "to speed up reads. For example, imagine a database describing projects and tasks (where a project can have",
+            "dir": "ltr",
+            "width": 408.11860000000036,
+            "height": 9,
+            "transform": [
+                9,
+                0,
+                0,
+                9,
+                90.23000000000019,
+                180.85
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": true
+        },
+        {
+            "str": "multiple tasks). You might need to get the project name and the task information. Rather than doing a join",
+            "dir": "ltr",
+            "width": 408.41399999999993,
+            "height": 9,
+            "transform": [
+                9,
+                0,
+                0,
+                9,
+                90.2400000000003,
+                168.56
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": true
+        },
+        {
+            "str": "across these tables, you can store the project name within the task table (in addition to the project table).",
+            "dir": "ltr",
+            "width": 403.6510000000001,
+            "height": 9,
+            "transform": [
+                9,
+                0,
+                0,
+                9,
+                90.20000000000033,
+                156.66
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": true
+        },
+        {
+            "str": "Or, you can go with a NoSQL database. A NoSQL database does not support joins and might structure data",
+            "dir": "ltr",
+            "width": 408.29200000000014,
+            "height": 9,
+            "transform": [
+                9,
+                0,
+                0,
+                9,
+                90.24000000000035,
+                138.69
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": true
+        },
+        {
+            "str": "in a different way. It is designed to scale better.",
+            "dir": "ltr",
+            "width": 179.3728,
+            "height": 9,
+            "transform": [
+                9,
+                0,
+                0,
+                9,
+                90.19000000000034,
+                126.69
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": false
+        },
+        {
+            "str": "",
+            "dir": "ltr",
+            "width": 0,
+            "height": 0,
+            "transform": [
+                10.5,
+                0,
+                0,
+                10.5,
+                90.49000000000035,
+                107.52
+            ],
+            "fontName": "g_d0_f9",
+            "hasEOL": true
+        },
+        {
+            "str": "Database Partitioning (Sharding)",
+            "dir": "ltr",
+            "width": 135.82170000000005,
+            "height": 10.5,
+            "transform": [
+                10.5,
+                0,
+                0,
+                10.5,
+                90.49000000000035,
+                107.52
+            ],
+            "fontName": "g_d0_f9",
+            "hasEOL": false
+        },
+        {
+            "str": "",
+            "dir": "ltr",
+            "width": 0,
+            "height": 0,
+            "transform": [
+                9,
+                0,
+                0,
+                9,
+                90.24000000000035,
+                90.12
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": true
+        },
+        {
+            "str": "Sharding means splitting the data across multiple machines while ensuring you have a way of figuring out",
+            "dir": "ltr",
+            "width": 408.2015999999997,
+            "height": 9,
+            "transform": [
+                9,
+                0,
+                0,
+                9,
+                90.24000000000035,
+                90.12
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": true
+        },
+        {
+            "str": "which data is on which machine.",
+            "dir": "ltr",
+            "width": 125.01059999999994,
+            "height": 9,
+            "transform": [
+                9,
+                0,
+                0,
+                9,
+                90.38000000000028,
+                77.29
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": true
+        },
+        {
+            "str": "A few common ways of partitioning include:",
+            "dir": "ltr",
+            "width": 170.1715,
+            "height": 9,
+            "transform": [
+                9,
+                0,
+                0,
+                9,
+                90.49000000000028,
+                58.63000000000001
+            ],
+            "fontName": "g_d0_f6",
+            "hasEOL": false
+        },
+        {
+            "str": "",
+            "dir": "ltr",
+            "width": 0,
+            "height": 0,
+            "transform": [
+                7,
+                0,
+                0,
+                7,
+                98.40000000000026,
+                23.040000000000006
+            ],
+            "fontName": "g_d0_f10",
+            "hasEOL": true
+        },
+        {
+            "str": "140",
+            "dir": "ltr",
+            "width": 12.242999999999999,
+            "height": 7,
+            "transform": [
+                7,
+                0,
+                0,
+                7,
+                98.40000000000026,
+                23.040000000000006
+            ],
+            "fontName": "g_d0_f10",
+            "hasEOL": false
+        },
+        {
+            "str": " ",
+            "dir": "ltr",
+            "width": 19.927000000000007,
+            "height": 0,
+            "transform": [
+                7,
+                0,
+                0,
+                7,
+                110.64300000000027,
+                23.040000000000006
+            ],
+            "fontName": "g_d0_f10",
+            "hasEOL": false
+        },
+        {
+            "str": "Cracking the Coding Interview, 6th Edition",
+            "dir": "ltr",
+            "width": 145.2807,
+            "height": 7.5,
+            "transform": [
+                7.5,
+                0,
+                0,
+                7.5,
+                130.57000000000028,
+                22.860000000000007
+            ],
+            "fontName": "g_d0_f11",
+            "hasEOL": false
+        }
+    ],
+    "styles": {
+        "g_d0_f5": {
+            "fontFamily": "sans-serif",
+            "ascent": 1.034,
+            "descent": -0.223,
+            "vertical": false
+        },
+        "g_d0_f6": {
+            "fontFamily": "sans-serif",
+            "ascent": 1.003,
+            "descent": -0.215,
+            "vertical": false
+        },
+        "g_d0_f7": {
+            "fontFamily": "sans-serif",
+            "ascent": 1.051,
+            "descent": -0.302,
+            "vertical": false
+        },
+        "g_d0_f8": {
+            "fontFamily": "sans-serif",
+            "ascent": 1.051,
+            "descent": -0.302,
+            "vertical": false
+        },
+        "g_d0_f9": {
+            "fontFamily": "sans-serif",
+            "ascent": 0.964,
+            "descent": -0.306,
+            "vertical": false
+        },
+        "g_d0_f10": {
+            "fontFamily": "sans-serif",
+            "ascent": 1.003,
+            "descent": -0.215,
+            "vertical": false
+        },
+        "g_d0_f11": {
+            "fontFamily": "sans-serif",
+            "ascent": 1.006,
+            "descent": -0.324,
+            "vertical": false
+        }
+    }
+}
