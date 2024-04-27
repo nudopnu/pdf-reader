@@ -3,13 +3,13 @@ import { TextContent, TextItem } from "pdfjs-dist/types/src/display/api";
 import { Paragraph } from "./Paragraph";
 import { OPS, isTextItem } from "./Utils";
 
-export function getParagraphs2(data: TextContent): Paragraph[] {
+export function getParagraphs2(data: TextContent, preFilter: (textItem: TextItem) => boolean): Paragraph[] {
     const paragraphs = [] as Paragraph[];
     let currentParagraph = new Paragraph();
     let previousItem: TextItem;
 
     data.items.forEach(item => {
-        if (!isTextItem(item) || item.str.trim() === "") return;
+        if (!isTextItem(item) || item.str.trim() === "" || !preFilter(item)) return;
         const itemText = item.str;
         const isEndOfLine = item.hasEOL;
 
@@ -22,7 +22,8 @@ export function getParagraphs2(data: TextContent): Paragraph[] {
             // Combining lines if they are close vertically and the font size does not change significantly
             const fontSizeDifference = Math.abs(fontSizeCurrent - fontSizePrevious);
             const linesAreClose = verticalDistance < previousItem.height;
-            if (linesAreClose && fontSizeDifference < 1) {
+            const isSameBlock = previousItem.fontName === item.fontName && previousItem.transform[4] === item.transform[4]
+            if (isSameBlock || (linesAreClose && fontSizeDifference < 1 && !item.str.trim().startsWith('•'))) {
                 // Combine hyphenated words
                 if (currentParagraph.endsWith('-')) {
                     currentParagraph.updateText(fullText => fullText.slice(0, fullText.length - 1));
@@ -45,7 +46,7 @@ export function getParagraphs2(data: TextContent): Paragraph[] {
 
         // At end of line, decide if it's a headline
         if (isEndOfLine && currentParagraph) {
-            if (itemText.split(' ').length < 5) {
+            if (Math.abs(item.width - previousItem.width) > 1) {
                 currentParagraph.trim();
                 paragraphs.push(currentParagraph);
                 currentParagraph = new Paragraph();

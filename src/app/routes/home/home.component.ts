@@ -7,6 +7,8 @@ import { Book, PersistenceService } from '../../services/persistence.service';
 import { toObservable } from "@angular/core/rxjs-interop";
 import { filter } from 'rxjs';
 import { debounced, hashBytes } from '../../core/Utils';
+import { TextToSpeechService } from '../../services/text-to-speech.service';
+import { Paragraph } from '../../core/pdfjs/Paragraph';
 
 declare const pdfjsLib: any;
 
@@ -31,22 +33,46 @@ export class HomeComponent {
   svgElement?: SVGElement;
   debouncedPageupdate: (...args: any[]) => void;
   prefilter: ((textItem: TextItem) => boolean) | undefined;
+  paragraphs: Paragraph[] = [];
 
-  constructor(private persistenceService: PersistenceService) {
+  constructor(
+    private persistenceService: PersistenceService,
+    private tts: TextToSpeechService,
+  ) {
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'pdfjs/pdf.worker.min.mjs';
     toObservable(persistenceService.books).pipe(
       filter(books => books.length > 0)
     ).subscribe(async (books) => {
       this.book = books[0];
-      const { currentPage } = await persistenceService.getProgress(this.book.hash);
+      const { currentPage, currentTextItem } = await persistenceService.getProgress(this.book.hash);
       this.documentFromBytes(this.book.file, this.book.title, currentPage);
       this.setPage(currentPage);
     });
 
     this.debouncedPageupdate = debounced((book: Book, newPageNumber: number) => {
-      console.log(`Updating `, book, newPageNumber);
       persistenceService.updateProgress({ bookHash: book.hash, currentPage: newPageNumber, currentTextItem: 0 });
     }, 1000);
+  }
+
+  async setProgress(currentPage: number, currentTextItem: number, start = false) {
+    if (currentTextItem === this.paragraphs.length) {
+      currentPage++;
+      currentTextItem = 0;
+      await this.setPage(currentPage);
+    }
+    await this.persistenceService.updateProgress({ bookHash: this.book!.hash, currentPage, currentTextItem });
+    let i = 0;
+    for (; i <= currentTextItem; i++) {
+      const paragraph = this.paragraphs[i];
+      paragraph.textItems.forEach(textItem => {
+        const { rect } = this.textItemToBBox.get(textItem)!;
+        rect.style.fill = "rgb(42 185 213 / 10%)";
+      });
+      if (i == currentTextItem && start) {
+        const paragraph = this.paragraphs[i];
+        this.tts.speak(paragraph.fullText, () => this.setProgress(currentPage, currentTextItem + 1, true));
+      }
+    }
   }
 
   async onFileInputChange(event: Event) {
@@ -68,8 +94,6 @@ export class HomeComponent {
     const hash = await hashBytes(pdfBytes);
     const pdfDocument = (await pdfjsLib.getDocument(pdfBytes).promise) as PDFDocumentProxy;
     const metadata = await pdfDocument.getMetadata();
-    console.log(metadata);
-
     const title = (metadata.info as any).Title || filename;
     const book = {
       hash,
@@ -103,34 +127,23 @@ export class HomeComponent {
       const page = await this.pdfDocument!.getPage(pageNumber);
       await this.renderPage(page);
 
-      const { fnArray, argsArray } = (await page.getOperatorList());
-      for (let k = 0; k < fnArray.length; k++) {
-        if (argsArray[k]?.length > 0) {
-          if ([44, 41].some(token => token === fnArray[k])) continue;
-          const CONSTRUCT_PATH = 91;
-          const RECT = 19;
-          if (fnArray[k] === CONSTRUCT_PATH) {
-            // argsArray[k][0][0] === RECT
-            // console.log(`page ${pageNumber}.${k}`, (OPS as any)[fnArray[k]], argsArray[k]);
-          }
-          // if ([85, 91].some(token => token === fnArray[k])) {
-          // }
-          // console.log(`page ${i + Math.round(document.numPages / 4)}`, fnArray[k], argsArray[k]);
-        }
-      }
-      console.log(fnArray, argsArray);
-
-
       const textContent = await page.getTextContent();
-      console.log(textContent);
-      const paragraphs = getParagraphs2(textContent);
-      console.log(paragraphs);
+      this.paragraphs = getParagraphs2(textContent, this.prefilter!);
 
       const dpr = window.devicePixelRatio || 1;
       const inv_resolution_factor = 1 / this.resolution_factor;
       const viewport = page.getViewport({ scale: this.scale * dpr * inv_resolution_factor });
       if (this.svgElement) this.svgElement.remove();
       this.svgElement = this.buildSVG(viewport, textContent) as SVGElement;
+
+      this.paragraphs.forEach((paragraph, idx) => {
+        paragraph.textItems.forEach(textItem => {
+          const { rect } = this.textItemToBBox.get(textItem)!;
+          rect.addEventListener('click', () => {
+            this.setProgress(this.currentPage, idx, true);
+          })
+        });
+      })
 
       document.getElementById("page-container")!.append(this.svgElement);
     }, 10);
@@ -215,17 +228,12 @@ export class HomeComponent {
       const rect = this.createRect(bbox);
       rect.setAttribute("fill", "none");
       if ((this.prefilter && this.prefilter(textItem))) {
-
-        rect.style.outline = "1px solid red";
+        // rect.style.outline = "1px solid red";
       }
       rect.style.cursor = "pointer";
       rect.style.pointerEvents = "all";
       this.textItemToBBox.set(textItem, { ...bbox, rect });
       svg.append(rect);
-
-      rect.addEventListener('click', () => {
-        console.log(textItem);
-      })
 
       setTimeout(() => {
         const clientRect = text.getBoundingClientRect();
