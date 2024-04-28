@@ -6,16 +6,28 @@ import { Injectable, signal } from '@angular/core';
 export class TextToSpeechService {
 
   isSpeaking = signal(false);
+  voices = signal<SpeechSynthesisVoice[]>([]);
+  selectedVoiceIdx = signal<number>(0);
+
+  pitch = 1;
+  rate = 1;
+  currentUtterance: SpeechSynthesisUtterance | undefined;
 
   constructor() {
-    const voices = window.speechSynthesis.getVoices();
-    console.log(voices);
+    this.voices.set(speechSynthesis.getVoices());
+    if (speechSynthesis.onvoiceschanged !== undefined) {
+      speechSynthesis.onvoiceschanged = () => this.voices.set(speechSynthesis.getVoices());
+    }
   }
 
   speak(text: string, callback: () => void) {
     this.isSpeaking.set(false);
-    window.speechSynthesis.cancel();
+    speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
+    const voice = this.voices()[this.selectedVoiceIdx()];
+    utterance.voice = voice;
+    utterance.pitch = this.pitch;
+    utterance.rate = this.rate;
     utterance.onboundary = function (event) {
       if (event.name !== 'word') return;
     };
@@ -24,12 +36,13 @@ export class TextToSpeechService {
       callback();
     };
     this.isSpeaking.set(true);
-    window.speechSynthesis.speak(utterance);
+    speechSynthesis.speak(utterance);
+    this.currentUtterance = utterance;
   }
 
   pause() {
     this.isSpeaking.set(false);
-    window.speechSynthesis.pause();
+    speechSynthesis.pause();
   }
 
   resume() {

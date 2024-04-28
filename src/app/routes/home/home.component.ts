@@ -19,6 +19,24 @@ declare const pdfjsLib: any;
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
+  async onOpenFilePicker() {
+    const pickerOpts = {
+      types: [
+        {
+          description: "PDF Documents",
+          accept: {
+            "application/pdf": [".pdf"],
+          },
+        },
+      ],
+      excludeAcceptAllOption: true,
+      multiple: false,
+    };
+
+    const [fileHandle] = await (window as any).showOpenFilePicker(pickerOpts);
+    const fileData = await fileHandle.getFile();
+    this.onFileReceived(fileData);
+  }
 
   @ViewChild('canvas') canvasRef!: ElementRef<HTMLCanvasElement>;
   @ViewChild(SliderComponent) sliderRef!: SliderComponent;

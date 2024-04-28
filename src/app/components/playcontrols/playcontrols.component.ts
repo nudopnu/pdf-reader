@@ -1,4 +1,4 @@
-import { Component, Signal } from '@angular/core';
+import { Component, Signal, WritableSignal } from '@angular/core';
 import { TextToSpeechService } from '../../services/text-to-speech.service';
 
 @Component({
@@ -9,9 +9,15 @@ import { TextToSpeechService } from '../../services/text-to-speech.service';
 export class PlaycontrolsComponent {
 
   isSpeaking: Signal<boolean>;
+  voices: Signal<SpeechSynthesisVoice[]>;
+  pitch = 1;
+  rate = 1;
+  selectedVoiceIdx: WritableSignal<number>;
 
   constructor(private tts: TextToSpeechService) {
     this.isSpeaking = tts.isSpeaking;
+    this.voices = tts.voices;
+    this.selectedVoiceIdx = tts.selectedVoiceIdx;
   }
 
   togglePlay() {
@@ -20,6 +26,16 @@ export class PlaycontrolsComponent {
     } else {
       this.tts.resume();
     }
+  }
+
+  onChangePitch(pitchValue: number) {
+    this.tts.pitch = pitchValue;
+    this.pitch = pitchValue;
+  }
+
+  onChangeRate(rateValue: number) {
+    this.tts.rate = rateValue;
+    this.rate = rateValue;
   }
 
 }

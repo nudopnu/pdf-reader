@@ -1,9 +1,10 @@
 <div
     style="position: fixed;top: 0;z-index: 2;display: flex;width: 100%;align-items: center;justify-content: center;padding: 16px;">
     <pdf-playcontrols></pdf-playcontrols>
-    <input type="file" (change)="onFileInputChange($event)" accept=".pdf">
-    <!-- <input type="range" #slider (input)="onSliderChange($event)" >{{currentPage}} -->
-    <pdf-slider #slider (onSliderChange)="onSliderChange($event)" style="flex: 0 1 500px"></pdf-slider>
+    <pdf-slider #slider (onSliderChange)="onSliderChange($event)" style="flex: 0 1 500px; padding: 0 0 0 10px"></pdf-slider>
+    <button nz-button nzType="default" nzShape="circle" (click)="onOpenFilePicker()">
+        <span nz-icon nzType="folder-open" nzTheme="outline"></span>
+    </button>
 </div>
 <div id="page-container">
     <canvas #canvas droppable (onFileDrop)="onFileReceived($event)"></canvas>

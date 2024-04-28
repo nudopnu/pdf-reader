@@ -1,3 +1,11 @@
 :host {
     display: flex;
 }
+
+.sliderparent {
+    display: flex;
+}
+
+::ng-deep .sliderparent>* {
+    flex-grow: 1;
+}

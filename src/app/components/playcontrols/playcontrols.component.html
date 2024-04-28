@@ -1,3 +1,6 @@
+<button nz-button nzType="default" nzShape="circle" nz-dropdown [nzDropdownMenu]="menu">
+    <span nz-icon nzType="setting" nzTheme="outline"></span>
+</button>
 <button nz-button nzType="default" nzShape="circle">
     <span nz-icon nzType="step-backward" nzTheme="fill"></span>
 </button>
@@ -8,3 +11,31 @@
 <button nz-button nzType="default" nzShape="circle">
     <span nz-icon nzType="step-forward" nzTheme="fill"></span>
 </button>
+
+
+<nz-dropdown-menu #menu="nzDropdownMenu">
+    <ul nz-menu>
+        <li nz-menu-item class="sliderparent">
+            Rate (slow to fast)
+            <nz-slider [nzMin]="0.5" [nzMax]="2" [nzStep]="0.1" [ngModel]="rate"
+                (ngModelChange)="onChangeRate($event)"></nz-slider>
+        </li>
+        <li nz-menu-item class="sliderparent">
+            pitch (low to high)
+            <nz-slider [nzMin]="0" [nzMax]="2" [nzStep]="0.1" [ngModel]="pitch"
+                (ngModelChange)="onChangePitch($event)"></nz-slider>
+        </li>
+        <li nz-submenu nzTitle="Voice">
+            <ul style="max-height: 300px; overflow-y: scroll;">
+                @for (voice of voices(); track $index) {
+                <li nz-menu-item (click)="selectedVoiceIdx.set($index)">
+                    {{voice.name}} ({{voice.lang}})
+                    @if ($index === selectedVoiceIdx()) {
+                    <span nz-icon nzType="check" nzTheme="outline"></span>
+                    }
+                </li>
+                }
+            </ul>
+        </li>
+    </ul>
+</nz-dropdown-menu>
