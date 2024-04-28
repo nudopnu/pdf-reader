@@ -21,8 +21,10 @@ export class TextToSpeechService {
   }
 
   speak(text: string, callback: () => void) {
+    if (this.isSpeaking()) {
+      speechSynthesis.cancel();
+    }
     this.isSpeaking.set(false);
-    speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
     const voice = this.voices()[this.selectedVoiceIdx()];
     utterance.voice = voice;
