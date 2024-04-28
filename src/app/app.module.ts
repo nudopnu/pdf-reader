@@ -16,6 +16,7 @@ import { ZorroModule } from './modules/zorro/zorro.module';
 import { SliderComponent } from './components/slider/slider.component';
 import { PlaycontrolsComponent } from './components/playcontrols/playcontrols.component';
 import { ErrorHandlerService } from './services/error-handler.service';
+import { FilepickerComponent } from './components/filepicker/filepicker.component';
 
 registerLocaleData(en);
 
@@ -25,7 +26,8 @@ registerLocaleData(en);
     HomeComponent,
     DroppableDirective,
     SliderComponent,
-    PlaycontrolsComponent
+    PlaycontrolsComponent,
+    FilepickerComponent
   ],
   imports: [
     BrowserModule,
