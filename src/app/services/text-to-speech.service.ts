@@ -1,5 +1,4 @@
-import { EnvironmentInjector, Injectable, signal } from '@angular/core';
-import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { Injectable, signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +14,7 @@ export class TextToSpeechService {
   currentUtterance: SpeechSynthesisUtterance | undefined;
   synth: SpeechSynthesis;
 
-  constructor(private notifications: NzNotificationService) {
+  constructor() {
     this.synth = window.speechSynthesis;
     this.voices.set(this.synth.getVoices());
     if (this.synth.onvoiceschanged !== undefined) {
@@ -42,10 +41,6 @@ export class TextToSpeechService {
     };
     this.isSpeaking.set(true);
     this.synth.speak(utterance);
-    this.notifications.info(`Voice: ${utterance.voice.name}, Rate: ${utterance.rate}, Pitch: ${utterance.pitch} ${this.synth.speaking}:`, `"${text}"`);
-    setTimeout(() => {
-      this.notifications.info("Speaking status after delay:", `${this.synth.speaking}`);
-    }, 1000);
     this.currentUtterance = utterance;
   }
 
