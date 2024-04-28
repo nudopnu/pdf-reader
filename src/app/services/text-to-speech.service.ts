@@ -1,4 +1,5 @@
-import { Injectable, signal } from '@angular/core';
+import { EnvironmentInjector, Injectable, signal } from '@angular/core';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Injectable({
   providedIn: 'root'
@@ -12,17 +13,19 @@ export class TextToSpeechService {
   pitch = 1;
   rate = 1;
   currentUtterance: SpeechSynthesisUtterance | undefined;
+  synth: SpeechSynthesis;
 
-  constructor() {
-    this.voices.set(speechSynthesis.getVoices());
-    if (speechSynthesis.onvoiceschanged !== undefined) {
-      speechSynthesis.onvoiceschanged = () => this.voices.set(speechSynthesis.getVoices());
+  constructor(private notifications: NzNotificationService) {
+    this.synth = window.speechSynthesis;
+    this.voices.set(this.synth.getVoices());
+    if (this.synth.onvoiceschanged !== undefined) {
+      this.synth.onvoiceschanged = () => this.voices.set(this.synth.getVoices());
     }
   }
 
   speak(text: string, callback: () => void) {
-    if (this.isSpeaking()) {
-      speechSynthesis.cancel();
+    if (this.synth.speaking) {
+      this.synth.cancel();
     }
     this.isSpeaking.set(false);
     const utterance = new SpeechSynthesisUtterance(text);
@@ -30,7 +33,7 @@ export class TextToSpeechService {
     utterance.voice = voice;
     utterance.pitch = this.pitch;
     utterance.rate = this.rate;
-    utterance.onboundary = function (event) {
+    utterance.onboundary = (event) => {
       if (event.name !== 'word') return;
     };
     utterance.onend = () => {
@@ -38,18 +41,22 @@ export class TextToSpeechService {
       callback();
     };
     this.isSpeaking.set(true);
-    speechSynthesis.speak(utterance);
+    this.synth.speak(utterance);
+    this.notifications.info(`Voice: ${utterance.voice.name}, Rate: ${utterance.rate}, Pitch: ${utterance.pitch} ${this.synth.speaking}:`, `"${text}"`);
+    setTimeout(() => {
+      this.notifications.info("Speaking status after delay:", `${this.synth.speaking}`);
+    }, 1000);
     this.currentUtterance = utterance;
   }
 
   pause() {
     this.isSpeaking.set(false);
-    speechSynthesis.pause();
+    this.synth.pause();
   }
 
   resume() {
     this.isSpeaking.set(true);
-    window.speechSynthesis.resume();
+    this.synth.resume();
   }
 
 }

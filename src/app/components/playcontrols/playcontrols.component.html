@@ -8,7 +8,7 @@
     <span nz-icon [nzType]="isSpeaking() ? 'pause' : 'caret-right'"
         [nzTheme]="isSpeaking() ? 'outline' : 'fill'"></span>
 </button>
-<button nz-button nzType="default" nzShape="circle">
+<button nz-button nzType="default" nzShape="circle" (click)="speakText()">
     <span nz-icon nzType="step-forward" nzTheme="fill"></span>
 </button>
 

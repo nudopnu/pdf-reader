@@ -38,4 +38,11 @@ export class PlaycontrolsComponent {
     this.rate = rateValue;
   }
 
+  speakText() {
+    const text = "Hello, this is a test";
+    this.tts.speak(text, () => {
+      console.log("Speech finished");
+    });
+  }
+
 }

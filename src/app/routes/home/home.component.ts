@@ -61,19 +61,26 @@ export class HomeComponent {
       currentTextItem = 0;
       await this.setPage(currentPage);
     }
-    await this.persistenceService.updateProgress({ bookHash: this.book!.hash, currentPage, currentTextItem });
     let i = 0;
-    for (; i <= currentTextItem; i++) {
+    for (; i < this.paragraphs.length; i++) {
       const paragraph = this.paragraphs[i];
-      paragraph.textItems.forEach(textItem => {
-        const { rect } = this.textItemToBBox.get(textItem)!;
-        rect.style.fill = "rgb(42 185 213 / 10%)";
-      });
+      if (i <= currentTextItem) {
+        paragraph.textItems.forEach(textItem => {
+          const { rect } = this.textItemToBBox.get(textItem)!;
+          rect.style.fill = "rgb(42 185 213 / 10%)";
+        });
+      } else {
+        paragraph.textItems.forEach(textItem => {
+          const { rect } = this.textItemToBBox.get(textItem)!;
+          rect.style.fill = "none";
+        });
+      }
       if (i == currentTextItem && start) {
         const paragraph = this.paragraphs[i];
         this.tts.speak(paragraph.fullText, () => this.setProgress(currentPage, currentTextItem + 1, true));
       }
     }
+    await this.persistenceService.updateProgress({ bookHash: this.book!.hash, currentPage, currentTextItem });
   }
 
   async onFileInputChange(event: Event) {
