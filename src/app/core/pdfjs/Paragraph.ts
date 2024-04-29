@@ -7,13 +7,20 @@ export class Paragraph {
     textItems: TextItem[] = [];
 
     constructor(
-        textItem?: TextItem
+        textItems?: TextItem[]
     ) {
-        if (!textItem) return;
-        this.append(textItem);
+        if (!textItems) return;
+        this.append(textItems);
     }
 
-    append(textItem: TextItem) {
+    append(textItems: TextItem[]) {
+        for (let i = 0; i < textItems.length; i++) {
+            const textItem = textItems[i];
+            this.add(textItem);
+        }
+    }
+
+    add(textItem: TextItem) {
         this.fullText += textItem.str;
         this.textItems.push(textItem);
     }

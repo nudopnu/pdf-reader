@@ -136,7 +136,7 @@ export class HomeComponent {
       await this.renderPage(page);
 
       const textContent = await page.getTextContent();
-      this.paragraphs = getParagraphs2(textContent, this.prefilter!);
+      this.paragraphs = getParagraphs2(textContent.items.filter(isTextItem), this.prefilter!);
 
       const dpr = window.devicePixelRatio || 1;
       const inv_resolution_factor = 1 / this.resolution_factor;
@@ -145,8 +145,10 @@ export class HomeComponent {
       this.svgElement = this.buildSVG(viewport, textContent) as SVGElement;
 
       this.paragraphs.forEach((paragraph, idx) => {
+        // const randomColor = `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 0.3)`;
         paragraph.textItems.forEach(textItem => {
           const { rect } = this.textItemToBBox.get(textItem)!;
+          // rect.style.fill = randomColor;
           rect.addEventListener('click', () => {
             this.setProgress(this.currentPage, idx, true);
           })

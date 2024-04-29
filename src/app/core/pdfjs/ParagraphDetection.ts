@@ -2,8 +2,9 @@ import { PDFDocumentProxy } from "pdfjs-dist";
 import { TextContent, TextItem } from "pdfjs-dist/types/src/display/api";
 import { Paragraph } from "./Paragraph";
 import { OPS, isTextItem } from "./Utils";
+import { Line } from "./Line";
 
-export function getParagraphs2(data: TextContent, preFilter: (textItem: TextItem) => boolean): Paragraph[] {
+export function getParagraphs(data: TextContent, preFilter: (textItem: TextItem) => boolean): Paragraph[] {
     const paragraphs = [] as Paragraph[];
     let currentParagraph = new Paragraph();
     let previousItem: TextItem;
@@ -30,16 +31,16 @@ export function getParagraphs2(data: TextContent, preFilter: (textItem: TextItem
                 } else if (!currentParagraph.isEmpty()) {
                     currentParagraph.updateText(fullText => fullText + " ");
                 }
-                currentParagraph.append(item);
+                currentParagraph.add(item);
             } else {
                 currentParagraph.trim();
                 if (!currentParagraph.isEmpty()) {
                     paragraphs.push(currentParagraph);
                 }
-                currentParagraph = new Paragraph(item);
+                currentParagraph = new Paragraph([item]);
             }
         } else {
-            currentParagraph = new Paragraph(item);
+            currentParagraph = new Paragraph([item]);
         }
 
         previousItem = item;
@@ -58,6 +59,64 @@ export function getParagraphs2(data: TextContent, preFilter: (textItem: TextItem
         currentParagraph.trim();
         paragraphs.push(currentParagraph);
     }
+
+    return paragraphs;
+}
+
+export function getParagraphs2(textItems: TextItem[], preFilter: (textItem: TextItem) => boolean): Paragraph[] {
+
+    // Detect lines first
+    const lines = [] as Line[];
+    let currentLine: Line = new Line();
+    let previousItem: TextItem | undefined;
+    for (let i = 0; i < textItems.length; i++) {
+        const currentItem = textItems[i];
+
+        if (currentItem.str.trim() === "" || !preFilter(currentItem)) continue;
+        if (previousItem) {
+            const deltaY = Math.abs(previousItem.transform[5] - currentItem.transform[5]);
+            const areOnSameLine = deltaY <= 5;
+            if (areOnSameLine) {
+                currentLine.add(currentItem);
+            } else {
+                lines.push(currentLine);
+                currentLine = new Line([currentItem]);
+            }
+        } else {
+            currentLine.add(currentItem);
+        }
+        previousItem = currentItem;
+    }
+    lines.push(currentLine);
+
+    // Group lines into paragraphs
+    const paragraphs = [] as Paragraph[];
+    let currentParagraph: Paragraph = new Paragraph();
+    let previousLine: Line | undefined;
+
+    for (let i = 0; i < lines.length; i++) {
+        const currentLine = lines[i];
+        if (previousLine) {
+            const distanceToPreviousLine = Math.abs(previousLine.bbox!.y - currentLine.bbox!.y);
+            const widthFactor = previousLine.bbox!.width / currentLine.bbox!.width;
+            if (distanceToPreviousLine <= 1.5 * currentLine.bbox!.height && widthFactor > 0.8) {
+                // Combine hyphenated words, otherwise append with space
+                if (currentParagraph.endsWith('-')) {
+                    currentParagraph.updateText(fullText => fullText.slice(0, fullText.length - 1));
+                } else if (!currentParagraph.isEmpty()) {
+                    currentParagraph.updateText(fullText => fullText + " ");
+                }
+                currentParagraph.append(currentLine.textItems);
+            } else {
+                paragraphs.push(currentParagraph);
+                currentParagraph = new Paragraph(currentLine.textItems);
+            }
+        } else {
+            currentParagraph.append(currentLine.textItems);
+        }
+        previousLine = currentLine;
+    }
+    paragraphs.push(currentParagraph);
 
     return paragraphs;
 }
@@ -95,7 +154,6 @@ export async function getPreFilter(document: PDFDocumentProxy) {
     let id = 0;
     for (let i = 1; i < limit; i++) {
         const page = await document.getPage(i + Math.round(document.numPages / 4));
-        // const page = await document.getPage(i);
         const textContent = await page.getTextContent();
         const items = textContent.items.filter(item => isTextItem(item)) as TextItem[];
 
