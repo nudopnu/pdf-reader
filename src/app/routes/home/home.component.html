@@ -1,11 +1,11 @@
 <div
     style="position: fixed;top: 0;z-index: 2;display: flex; gap: 3px; width: 100%;align-items: center;justify-content: center;padding: 16px;">
     <pdf-playcontrols [resolution]="resolution_factor" (resolutionChange)="changeResolution($event)"></pdf-playcontrols>
-    <button nz-button nzType="default" nzShape="circle" nzSize="large" (click)="controls.reset()">
+    <button nz-button nzType="default" nzShape="circle" nzSize="large" (click)="resetZoom()">
         <span nz-icon nzType="fullscreen" nzTheme="outline"></span>
     </button>
     <pdf-slider #slider (onSliderChange)="onSliderChange($event)"
-        style="flex: 0 1 500px; padding: 10px 0 0 4px"></pdf-slider>
+        style="flex: 0 1 500px; padding: 0 0 0 4px"></pdf-slider>
     <pdf-filepicker (fileReceived)="onFileReceived($event)"></pdf-filepicker>
 </div>
 <pdf-controls #controls>

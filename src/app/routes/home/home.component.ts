@@ -11,6 +11,7 @@ import { TextToSpeechService } from '../../services/text-to-speech.service';
 import { Paragraph } from '../../core/pdfjs/Paragraph';
 import { SliderComponent } from '../../components/slider/slider.component';
 import { BBox } from '../../core/pdfjs/Bbox';
+import { ControlsComponent } from '../../components/controls/controls.component';
 
 declare const pdfjsLib: any;
 
@@ -21,6 +22,7 @@ declare const pdfjsLib: any;
 })
 export class HomeComponent {
 
+  @ViewChild(ControlsComponent) controls!: ControlsComponent;
   @ViewChild('canvas') canvasRef!: ElementRef<HTMLCanvasElement>;
   @ViewChild(SliderComponent) sliderRef!: SliderComponent;
   @Input() scale = 1;
@@ -61,6 +63,11 @@ export class HomeComponent {
     console.log(resolution);
     this.resolution_factor = resolution;
     await this.renderPage(this.currentPage!);
+  }
+
+  resetZoom() {
+    this.controls.reset();
+    this.changeResolution(2);
   }
 
   async setProgress(currentPage: number, currentTextItem: number, start = false) {
