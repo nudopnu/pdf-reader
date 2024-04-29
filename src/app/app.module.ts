@@ -17,6 +17,7 @@ import { SliderComponent } from './components/slider/slider.component';
 import { PlaycontrolsComponent } from './components/playcontrols/playcontrols.component';
 import { ErrorHandlerService } from './services/error-handler.service';
 import { FilepickerComponent } from './components/filepicker/filepicker.component';
+import { ControlsComponent } from './components/controls/controls.component';
 
 registerLocaleData(en);
 
@@ -27,7 +28,8 @@ registerLocaleData(en);
     DroppableDirective,
     SliderComponent,
     PlaycontrolsComponent,
-    FilepickerComponent
+    FilepickerComponent,
+    ControlsComponent
   ],
   imports: [
     BrowserModule,

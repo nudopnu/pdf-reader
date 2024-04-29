@@ -7,11 +7,10 @@ export class Line {
     textItems = [] as TextItem[];
 
     constructor(textItems?: TextItem[]) {
-        if (textItems) {
-            for (let i = 0; i < textItems.length; i++) {
-                const textItem = textItems[i];
-                this.add(textItem);
-            }
+        if (!textItems) return;
+        for (let i = 0; i < textItems.length; i++) {
+            const textItem = textItems[i];
+            this.add(textItem);
         }
     }
 
@@ -29,9 +28,9 @@ export class Line {
             let bottom = y + height;
 
             this.bbox.x = Math.min(this.bbox.x, x);
-            this.bbox.y = Math.min(this.bbox.y, y);
+            this.bbox.y = Math.max(this.bbox.y, y);
             this.bbox.width = Math.max(currentRight, right) - this.bbox.x;
-            this.bbox.height = Math.max(currentBottom, bottom) - this.bbox.y;
+            this.bbox.height = Math.min(currentBottom, bottom) - this.bbox.y;
         }
     }
 }

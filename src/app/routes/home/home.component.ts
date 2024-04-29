@@ -10,6 +10,7 @@ import { debounced, hashBytes } from '../../core/Utils';
 import { TextToSpeechService } from '../../services/text-to-speech.service';
 import { Paragraph } from '../../core/pdfjs/Paragraph';
 import { SliderComponent } from '../../components/slider/slider.component';
+import { BBox } from '../../core/pdfjs/Bbox';
 
 declare const pdfjsLib: any;
 
@@ -27,9 +28,10 @@ export class HomeComponent {
 
   book?: Book | undefined;
   pdfDocument?: PDFDocumentProxy;
-  textItemToBBox = new Map<TextItem, { x: number, y: number, width: number, height: number, rect: SVGRectElement }>();
+  currentPage?: PDFPageProxy;
+  textItemToBBox = new Map<TextItem, BBox & { rect: SVGRectElement }>();
   debounceTimeout?: NodeJS.Timeout;
-  currentPage = 1;
+  currentPageNumber = 1;
   SVG_NS = "http://www.w3.org/2000/svg";
   svgElement?: SVGElement;
   debouncedPageupdate: (...args: any[]) => void;
@@ -53,6 +55,12 @@ export class HomeComponent {
     this.debouncedPageupdate = debounced((book: Book, newPageNumber: number) => {
       persistenceService.updateProgress({ bookHash: book.hash, currentPage: newPageNumber, currentTextItem: 0 });
     }, 1000);
+  }
+
+  async changeResolution(resolution: number) {
+    console.log(resolution);
+    this.resolution_factor = resolution;
+    await this.renderPage(this.currentPage!);
   }
 
   async setProgress(currentPage: number, currentTextItem: number, start = false) {
@@ -130,17 +138,18 @@ export class HomeComponent {
     if (this.debounceTimeout) clearTimeout(this.debounceTimeout);
     this.debounceTimeout = setTimeout(async () => {
       this.debouncedPageupdate(this.book, pageNumber);
-      this.currentPage = pageNumber;
+      this.currentPageNumber = pageNumber;
       this.textItemToBBox.clear();
-      const page = await this.pdfDocument!.getPage(pageNumber);
-      await this.renderPage(page);
+      this.currentPage = await this.pdfDocument!.getPage(pageNumber);
+      await this.renderPage(this.currentPage);
 
-      const textContent = await page.getTextContent();
-      this.paragraphs = getParagraphs2(textContent.items.filter(isTextItem), this.prefilter!);
+      const textContent = await this.currentPage.getTextContent();
+      const textItems = textContent.items.filter(isTextItem);
+      this.paragraphs = getParagraphs2(textItems, this.prefilter!);
 
       const dpr = window.devicePixelRatio || 1;
       const inv_resolution_factor = 1 / this.resolution_factor;
-      const viewport = page.getViewport({ scale: this.scale * dpr * inv_resolution_factor });
+      const viewport = this.currentPage.getViewport({ scale: this.scale * dpr * inv_resolution_factor });
       if (this.svgElement) this.svgElement.remove();
       this.svgElement = this.buildSVG(viewport, textContent) as SVGElement;
 
@@ -150,7 +159,8 @@ export class HomeComponent {
           const { rect } = this.textItemToBBox.get(textItem)!;
           // rect.style.fill = randomColor;
           rect.addEventListener('click', () => {
-            this.setProgress(this.currentPage, idx, true);
+            this.setProgress(this.currentPageNumber, idx, true);
+            console.log(paragraph.bbox);
           })
         });
       })

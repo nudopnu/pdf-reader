@@ -1,4 +1,4 @@
-import { Component, Signal, WritableSignal } from '@angular/core';
+import { Component, EventEmitter, Input, Output, Signal, WritableSignal } from '@angular/core';
 import { TextToSpeechService } from '../../services/text-to-speech.service';
 
 @Component({
@@ -7,6 +7,12 @@ import { TextToSpeechService } from '../../services/text-to-speech.service';
   styleUrl: './playcontrols.component.scss'
 })
 export class PlaycontrolsComponent {
+
+  @Input()
+  resolution = 2;
+
+  @Output()
+  resolutionChange = new EventEmitter<number>();
 
   isSpeaking: Signal<boolean>;
   voices: Signal<SpeechSynthesisVoice[]>;

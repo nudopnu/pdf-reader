@@ -1,28 +1,41 @@
 import { TextItem } from "pdfjs-dist/types/src/display/api";
+import { BBox } from "./Bbox";
+import { Line } from "./Line";
 
 
 export class Paragraph {
 
     fullText: string = "";
+    lines: Line[] = [];
     textItems: TextItem[] = [];
+    bbox: BBox | undefined;
 
     constructor(
-        textItems?: TextItem[]
+        line?: Line
     ) {
-        if (!textItems) return;
-        this.append(textItems);
+        if (!line) return;
+        this.add(line);
     }
 
-    append(textItems: TextItem[]) {
-        for (let i = 0; i < textItems.length; i++) {
-            const textItem = textItems[i];
-            this.add(textItem);
+    add(line: Line) {
+        if (!line.bbox) return;
+        this.fullText += line.textItems.map(textItem => textItem.str).join(" ");
+        this.lines.push(line);
+        if (!this.bbox) {
+            this.bbox = line.bbox;
+        } else {
+            const { x, y, width, height } = line.bbox;
+            let currentRight = this.bbox.x + this.bbox.width;
+            let currentBottom = this.bbox.y + this.bbox.height;
+            let right = x + width;
+            let bottom = y + height;
+
+            this.bbox.x = Math.min(x, this.bbox.x);
+            this.bbox.y = Math.max(y, this.bbox.y);
+            this.bbox.width = Math.max(currentRight, right) - this.bbox.x;
+            this.bbox.height = Math.min(currentBottom, bottom) - this.bbox.y;
         }
-    }
-
-    add(textItem: TextItem) {
-        this.fullText += textItem.str;
-        this.textItems.push(textItem);
+        this.textItems = this.textItems.concat(line.textItems);
     }
 
     isEmpty() {

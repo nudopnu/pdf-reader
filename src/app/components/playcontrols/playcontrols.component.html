@@ -1,20 +1,25 @@
-<button nz-button nzType="default" nzShape="circle" nz-dropdown [nzDropdownMenu]="menu">
+<button nz-button nzSize="large" nzType="default" nzShape="circle" nz-dropdown [nzDropdownMenu]="menu">
     <span nz-icon nzType="setting" nzTheme="outline"></span>
 </button>
-<button nz-button nzType="default" nzShape="circle">
+<button nz-button nzSize="large" nzType="default" nzShape="circle">
     <span nz-icon nzType="step-backward" nzTheme="fill"></span>
 </button>
-<button nz-button nzType="default" nzShape="circle" (click)="togglePlay()">
+<button nz-button nzSize="large" nzType="default" nzShape="circle" (click)="togglePlay()">
     <span nz-icon [nzType]="isSpeaking() ? 'pause' : 'caret-right'"
         [nzTheme]="isSpeaking() ? 'outline' : 'fill'"></span>
 </button>
-<button nz-button nzType="default" nzShape="circle" (click)="speakText()">
+<button nz-button nzSize="large" nzType="default" nzShape="circle" (click)="speakText()">
     <span nz-icon nzType="step-forward" nzTheme="fill"></span>
 </button>
 
 
 <nz-dropdown-menu #menu="nzDropdownMenu">
     <ul nz-menu>
+        <li nz-menu-item class="sliderparent">
+            Resolution
+            <nz-slider [nzMin]="0.5" [nzMax]="5" [nzStep]="0.5" [ngModel]="resolution"
+                (ngModelChange)="resolutionChange.emit($event)"></nz-slider>
+        </li>
         <li nz-menu-item class="sliderparent">
             Rate (slow to fast)
             <nz-slider [nzMin]="0.5" [nzMax]="2" [nzStep]="0.1" [ngModel]="rate"
