@@ -59,6 +59,14 @@ export class HomeComponent {
     }, 1000);
   }
 
+  onNextPageRequest() {
+    this.setPage(Math.min(this.book!.numPages, this.currentPageNumber + 1));
+  }
+
+  onPreviousPageRequest() {
+    this.setPage(Math.max(1, this.currentPageNumber - 1));
+  }
+
   async changeResolution(resolution: number) {
     console.log(resolution);
     this.resolution_factor = resolution;

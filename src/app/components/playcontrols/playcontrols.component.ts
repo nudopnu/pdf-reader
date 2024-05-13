@@ -8,11 +8,11 @@ import { TextToSpeechService } from '../../services/text-to-speech.service';
 })
 export class PlaycontrolsComponent {
 
-  @Input()
-  resolution = 2;
+  @Input() resolution = 2;
 
-  @Output()
-  resolutionChange = new EventEmitter<number>();
+  @Output() resolutionChange = new EventEmitter<number>();
+  @Output() previousPageRequest = new EventEmitter<void>();
+  @Output() nextPageRequest = new EventEmitter<void>();
 
   isSpeaking: Signal<boolean>;
   voices: Signal<SpeechSynthesisVoice[]>;
